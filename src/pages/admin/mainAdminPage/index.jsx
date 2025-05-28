@@ -20,6 +20,8 @@ const MainAdminPage = () => {
         image8_3: null,
     });
 
+    const API_URL = import.meta.env.VITE_API_URL || '';
+
     const [uploading, setUploading] = useState(false);
 
     const onDrop1_1 = useCallback((acceptedFiles) => {
@@ -73,7 +75,7 @@ const MainAdminPage = () => {
         if (files.image8_3) formData.append("files", files.image8_3);
 
         try {
-            const res = await fetch("http://localhost:5000/articles", {
+            const res = await fetch(`${API_URL}/articles`, {
                 method: "POST",
                 body: formData,
             });

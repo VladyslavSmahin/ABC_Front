@@ -83,12 +83,15 @@ const Article = () => {
     const [article, setArticle] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const API_URL = import.meta.env.VITE_API_URL || '';
 
     useEffect(() => {
         const fetchArticle = async () => {
             setLoading(true);
             try {
-                const response = await fetch(`http://localhost:5000/articles/${postId}`);
+
+                const response = await fetch(`${API_URL}/articles/${postId}`);
+
                 if (!response.ok) {
                     throw new Error("Ошибка при получении статьи");
                 }

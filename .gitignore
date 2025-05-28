@@ -23,3 +23,5 @@ back/
 *.njsproj
 *.sln
 *.sw?
+
+.vercel

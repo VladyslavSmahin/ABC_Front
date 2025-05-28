@@ -13,6 +13,7 @@ const Home = ({className = ''}) => {
     const [mainArticle6, setMainArticle6] = useState(null);
     const [randomArticles, setRandomArticles] = useState([]);
     const [loading, setLoading] = useState(false);
+    const API_URL = import.meta.env.VITE_API_URL || '';
 
     const [error, setError] = useState(null);
 
@@ -26,7 +27,7 @@ const Home = ({className = ''}) => {
         const fetchArticles = async () => {
             setLoading(true);
             try {
-                const response = await fetch("http://localhost:5000/articles");
+                const response = await fetch(`${API_URL}/articles`);
                 if (!response.ok) {
                     throw new Error("Ошибка при получении постов");
                 }

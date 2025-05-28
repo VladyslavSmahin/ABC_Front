@@ -9,6 +9,7 @@ function GetAllArticlesPage() {
     const [error, setError] = useState(null);
     const [openDescriptionId, setOpenDescriptionId] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
+    const API_URL = import.meta.env.VITE_API_URL || '';
 
     const filteredPosts = posts.filter(post =>
         post.title.toLowerCase().includes(searchTerm.toLowerCase())
@@ -21,7 +22,7 @@ function GetAllArticlesPage() {
         setLoading(true);
         setError(null);
         try {
-            const response = await fetch("http://localhost:5000/articles");
+            const response = await fetch(`${API_URL}/articles`);
             if (!response.ok) {
                 throw new Error("Ошибка при получении постов");
             }
@@ -41,7 +42,7 @@ function GetAllArticlesPage() {
         setLoading(true);
         setError(null);
         try {
-            const response = await fetch(`http://localhost:5000/articles/${id}`, {
+            const response = await fetch(`${API_URL}/articles/${id}`, {
                 method: 'DELETE',
             });
 
