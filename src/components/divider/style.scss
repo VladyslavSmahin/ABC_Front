@@ -1,0 +1,9 @@
+.divider {
+  height: 3px;
+  background-color: black;
+  border-radius: 50px;
+  width: 100%;
+  @media (min-width: 320px) and (max-width: 1920px) {
+    height: calc(1px + 2 * (100vw - 320px) / 1600);
+  }
+}

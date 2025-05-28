@@ -1,0 +1,221 @@
+.homeWrapper {
+  width: 100%;
+
+  .home {
+
+    .homeSection1 {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 0;
+
+      @media (max-width: 1079px) {
+        display: none;
+      }
+
+      .logoHome {
+        max-width: 250px;
+        @media (min-width: 1080px) and (max-width: 1920px) {
+          max-width: calc(165px + 85 * (100vw - 1080px) / 940);
+        }
+      }
+
+      .homeSection1Text {
+        font-weight: 700;
+        font-size: 61px;
+        line-height: 91%;
+        letter-spacing: -0.04em;
+        font-variant: all-small-caps;
+        color: #000;
+
+        @media (min-width: 1080px) and (max-width: 1920px) {
+          font-size: calc(40px + 21 * (100vw - 1080px) / 940);
+        }
+
+
+        h3 {
+          text-transform: uppercase;
+          font-family: 'Raleway-700', sans-serif;
+        }
+
+        h4 {
+          font-family: 'Raleway-400', sans-serif;
+          font-weight: 500;
+        }
+      }
+    }
+
+  }
+
+  .dividerSection1 {
+    @media (max-width: 1079px) {
+      display: none;
+    }
+  }
+
+  .homeSection2 {
+    display: flex;
+    width: 100%;
+    gap: 30px;
+    padding: 60px 0;
+    margin: 0 auto;
+
+    @media (max-width: 1080px) {
+      flex-direction: column;
+    }
+
+    .dividerSection2RightTextWrapper {
+      @media (min-width: 1081px) {
+        display: none;
+      }
+    }
+
+
+    .homeSection2LeftTextWrapper {
+
+      @media (min-width: 1080px) and (max-width: 1920px) {
+        max-width: 575px;
+      }
+
+      .homeSection2TextWrapper1 {
+        margin-bottom: 50px;
+      }
+
+      .logoHomeSection2 {
+        border-radius: 20px;
+        margin-bottom: 25px;
+        max-width: 575px;
+        grid-column: 1;
+
+        @media (min-width: 1080px) and (max-width: 1920px) {
+          max-width: calc(400px + 175 * (100vw - 1080px) / 840);
+        }
+        @media (min-width: 320px) and (max-width: 1080px) {
+          max-width: calc(290px + 700 * (100vw - 320px) / 760);
+          align-self: center;
+        }
+      }
+    }
+
+    .homeSection2RightTextWrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .homeSection2TextWrapper {
+      display: flex;
+      flex-direction: column;
+
+      .photoDate {
+        margin-bottom: 15px;
+      }
+    }
+
+  }
+
+  .homeSection3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
+    padding: 60px 0;
+
+    @media (max-width: 1079px) {
+      grid-template-columns: 1fr 1fr;
+    }
+    @media (min-width: 320px) and (max-width: 767px) {
+      grid-template-columns: 1fr;
+    }
+
+    .homeSection3CardWrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      .homeSection3CardWrapperPhoto {
+        align-self: center;
+        border-radius: 20px;
+        margin-bottom: 25px;
+        max-width: 360px;
+
+        @media (min-width: 1080px) and (max-width: 1920px) {
+          margin-bottom: calc(15px + 10 * (100vw - 1080px) / 840);
+          max-width: calc(240px + 120 * (100vw - 1080px) / 840);
+        }
+        @media (min-width: 768px) and (max-width: 1080px) {
+          margin-bottom: calc(10px + 5 * (100vw - 768px) / 312);
+          max-width: calc(330px + 100 * (100vw - 768px) / 312);
+        }
+        @media (min-width: 320px) and (max-width: 767px) {
+          max-width: calc(300px + 250 * (100vw - 320px) / 447);
+        }
+      }
+
+      .photoDate {
+        margin-bottom: 15px;
+        @media (min-width: 1080px) and (max-width: 1920px) {
+          margin-bottom: calc(7px + 8 * (100vw - 1080px) / 840);
+        }
+        @media (min-width: 320px) and (max-width: 1080px) {
+          margin-bottom: calc(5px + 2 * (100vw - 320px) / 760);
+
+        }
+      }
+
+      .photoDescription {
+
+      }
+    }
+  }
+
+  .homeSection4 {
+    font-family: 'Raleway-300', sans-serif;
+    font-weight: 300;
+    font-size: 25px;
+    line-height: 125%;
+    text-align: justify;
+    color: #000;
+    padding: 43px 0;
+
+
+    @media (min-width: 320px) and (max-width: 1920px) {
+      font-size: calc(15px + 10 * (100vw - 320px) / 1600);
+      padding: calc(23px + 20 * (100vw - 320px) / 1600) 0;
+    }
+
+    span {
+      font-family: 'Raleway-700', sans-serif;
+      font-weight: 700;
+    }
+  }
+}
+
+.photoDate {
+  font-family: 'OpenSans-300', sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 91%;
+  text-transform: uppercase;
+  color: #000;
+
+  @media (min-width: 1080px) and (max-width: 1920px) {
+    font-size: calc(12px + 4 * (100vw - 1080px) / 840);
+  }
+  @media (min-width: 320px) and (max-width: 1080px) {
+    font-size: calc(11px + 1 * (100vw - 320px) / 760);
+  }
+}
+
+.photoDescription {
+  font-family: 'Raleway-700', sans-serif;
+  font-weight: 700;
+  font-size: 25px;
+  line-height: 112%;
+  color: #000;
+  @media (min-width: 1080px) and (max-width: 1920px) {
+    font-size: calc(20px + 5 * (100vw - 1080px) / 840);
+  }
+  @media (min-width: 320px) and (max-width: 1080px) {
+    font-size: calc(14px + 6 * (100vw - 320px) / 760);
+  }
+}

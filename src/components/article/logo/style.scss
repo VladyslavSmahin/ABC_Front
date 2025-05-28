@@ -1,0 +1,27 @@
+.logo{
+  display: flex;
+  max-width: 240px;
+  align-items: center;
+
+  p:nth-child(1){
+    font-family: 'Raleway-700', sans-serif;
+    font-weight: 700;
+    font-size: 70px;
+    line-height: 91%;
+    letter-spacing: -0.05em;
+    font-variant: all-small-caps;
+    color: #000;
+    margin-right: 4px;
+
+  }
+  p:nth-child(2){
+    font-family: 'Raleway-400', sans-serif;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 74%;
+    letter-spacing: -0.05em;
+    font-variant: all-small-caps;
+    color: #000;
+    padding-top: 10px;
+  }
+}

@@ -1,0 +1,47 @@
+.getInTouch {
+  margin-bottom: 50px;
+
+  .getInTouchDivider {
+    margin-bottom: 40px;
+  }
+
+  .getInTouchContent {
+    display: flex;
+    justify-content: space-between;
+
+    .getInTouchContent_leftColumn {
+
+      .getInTouchForm {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+
+    .getInTouchContent_rightColumn {
+      display: flex;
+      flex-direction: column;
+
+      h3 {
+
+      }
+
+      .socialsContainer {
+        display: flex;
+        flex-direction: column;
+
+        .socials {
+          display: flex;
+
+          img {
+            margin-right: 30px;
+          }
+
+          p {
+            text-transform: uppercase;
+          }
+        }
+      }
+    }
+  }
+}

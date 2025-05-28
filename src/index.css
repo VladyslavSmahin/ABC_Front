@@ -1,0 +1,79 @@
+@font-face {
+    font-family: 'OpenSans-300';
+    src: url('./assets/fonts/Open_Sans/static/OpenSans-Light.ttf') format('truetype');
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Raleway-300';
+    src: url('./assets/fonts/Raleway/static/Raleway-Light.ttf') format('truetype');
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Raleway-400';
+    src: url('./assets/fonts/Raleway/static/Raleway-Regular.ttf') format('truetype');
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Raleway-700';
+    src: url('./assets/fonts/Raleway/static/Raleway-Bold.ttf') format('truetype');
+    font-style: normal;
+}
+
+.number {
+    font-family: 'OpenSans-300', sans-serif;
+    text-decoration: none;
+    color: var(--color-black);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body, #root {
+    width: 100%;
+    min-height: 100vh;
+    font-family: sans-serif;
+}
+
+html, body {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    background-color: var(--color-white);
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+a {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+    text-decoration-color: #070000;
+}
+
+h1 {
+
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+
+button:hover {
+
+}
+
+button:focus,
+button:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+}

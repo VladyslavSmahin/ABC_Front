@@ -1,0 +1,83 @@
+.postWrapper {
+  .post {
+
+
+    .postWrapperMainImg {
+      margin-bottom: 11px;
+
+    }
+
+    .postTitle {
+      font-family: 'Raleway-700', sans-serif;
+      font-weight: 700;
+      font-size: 30px;
+      line-height: 112%;
+      color: #000;
+      margin-bottom: 25px;
+    }
+
+    .postContent {
+      font-family: 'Raleway-400', sans-serif;
+      font-weight: 400;
+      font-size: 22px;
+      line-height: 125%;
+      text-align: justify;
+      color: #000;
+      padding-left: 22px;
+      margin-bottom: 40px;
+    }
+
+    .shareThis {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      margin-bottom: 30px;
+
+      p {
+        text-transform: uppercase;
+        font-family: 'Raleway-700', sans-serif;
+        font-weight: 700;
+        font-size: 25px;
+        line-height: 112%;
+        color: #000;
+        margin-right: 3px;
+      }
+
+      .socialsWrapper {
+        display: flex;
+        align-items: center;
+
+        a {
+          margin-right: 3px;
+        }
+      }
+    }
+  }
+
+  .postReadMoreWrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 50px 0;
+
+    .postReadMoreTitle {
+      text-transform: uppercase;
+      font-family: 'Raleway-700', sans-serif;
+      font-weight: 700;
+      font-size: 25px;
+      line-height: 112%;
+      color: #000;
+      margin-right: 3px;
+
+      .postReadMoreContent {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+      }
+    }
+  }
+  .loading{
+    font-family: 'Raleway-700', sans-serif;
+    font-weight: 700;
+    font-size: 35px;
+  }
+}
