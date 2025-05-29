@@ -10,7 +10,8 @@ const MainAdminPage = () => {
         category: "",
         title: "",
         description: "",
-        date: "",
+        date: "",      // Форматированная дата (MAY 28, 2025)
+        dateRaw: "",   // Оригинальная дата (2025-05-28)
         isMainArticle: "false",
     });
 
@@ -20,7 +21,9 @@ const MainAdminPage = () => {
         image8_3: null,
     });
 
-    const API_URL = import.meta.env.VITE_API_URL || '';
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
+
 
     const [uploading, setUploading] = useState(false);
 
@@ -55,8 +58,29 @@ const MainAdminPage = () => {
     });
 
     const handleChange = (e, field) => {
-        setData({ ...data, [field]: e.target.value });
+        if (field === "date") {
+            const raw = e.target.value;
+            const dateObj = new Date(raw);
+            const formatted = dateObj.toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+            }).toUpperCase(); // MAY 28, 2025
+
+            setData(prev => ({
+                ...prev,
+                dateRaw: raw,
+                date: formatted
+            }));
+            console.log("RAW:", raw, "FORMATTED:", formatted);
+
+        } else {
+            setData({ ...data, [field]: e.target.value });
+        }
+
     };
+
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -67,6 +91,7 @@ const MainAdminPage = () => {
         formData.append("title", data.title);
         formData.append("description", data.description);
         formData.append("date", data.date);
+        formData.append("dateRaw", data.dateRaw);
         formData.append("isMainArticle", data.isMainArticle);
 
         // Append files to FormData
@@ -90,6 +115,7 @@ const MainAdminPage = () => {
                 title: "",
                 description: "",
                 date: "",
+                dateRaw: "",
                 isMainArticle: "false",
             });
             setFiles({
@@ -142,9 +168,8 @@ const MainAdminPage = () => {
                     <div className="dateWrapper">
                         <input
                             className="date"
-                            type="text"
-                            placeholder="Дата (например, APR 12, 2025)"
-                            value={data.date}
+                            type="date"
+                            value={data.dateRaw}
                             onChange={(e) => handleChange(e, "date")}
                         />
                     </div>

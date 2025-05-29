@@ -1,13 +1,16 @@
 import './style.scss'
 import {Link} from "react-router-dom";
 import Divider from "../divider/index.jsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 const Header = ({className = ''}) => {
-
+    const [posts, setPosts] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [searchResults, setSearchResults] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
-    const handleClick = (e) => {
+    const handleClick = () => {
         setIsOpen(!isOpen);
 
         const header = document.querySelector('.header');
@@ -19,7 +22,39 @@ const Header = ({className = ''}) => {
         if (headerContainer) headerContainer.classList.toggle('headerContainerOpen', !isOpen);
 
        // if (onClick) onClick(e);
+
     };
+
+    useEffect(() => {
+        const fetchPosts = async () => {
+            try {
+                const res = await fetch(`${API_URL}/articles`);
+                const data = await res.json();
+                setPosts(data);
+            } catch (err) {
+                console.error("Ошибка загрузки статей:", err);
+            }
+        };
+
+        fetchPosts();
+    }, []);
+
+    useEffect(() => {
+        if (searchTerm.length < 3) {
+            setSearchResults([]);
+            return;
+        }
+
+        const filtered = posts.filter(post =>
+            post.title.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        setSearchResults(filtered);
+
+        console.log("searchTerm:", searchTerm);
+        console.log("searchResults:", filtered);
+    }, [searchTerm, posts]);
+
+
 
     return (
         <div className='headerWrapper'>
@@ -44,7 +79,34 @@ const Header = ({className = ''}) => {
                         <li><Link to='/databases' className='linkTo linkToDatabases'>Databases</Link></li>
                         <li><Link to='/digests' className='linkTo linkToDigests'>Digests</Link></li>
                         <li><Link to='/links' className='linkTo linkToLinks'>Links</Link></li>
-                        <input type='text' placeholder='Search by name' className='headerInput'/>
+                        <li className="searchLi">
+                            <input
+                                type='text'
+                                placeholder='Search by name'
+                                className='headerInput'
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                            />
+                            {searchTerm.length > 0 && (
+                                <div className="searchResults">
+                                    {searchTerm.length < 3 ? (
+                                        <div className="searchResultItem">Please enter at least 3 characters</div>
+                                    ) : searchResults.length === 0 ? (
+                                        <div className="searchResultItem">No matches found</div>
+                                    ) : (
+                                        searchResults.slice(0, 10).map((post) => (
+                                            <Link
+                                                key={post._id}
+                                                to={`/${post.category}/post/${post._id}`}
+                                                className="searchResultItem"
+                                                onClick={() => setSearchTerm('')}
+                                                dangerouslySetInnerHTML={{ __html: post.title || 'пусто' }}
+                                            />
+                                        ))
+                                    )}
+                                </div>
+                            )}
+                        </li>
                         <button type='submit' className='buttonAccount'><img src='/images/accountIcon.svg'
                                                                              alt='accountIcon'/></button>
                         <li><a href='#getInTouch' className='linkTo linkToGetInTouch'>Contact us</a></li>

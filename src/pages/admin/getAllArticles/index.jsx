@@ -9,12 +9,12 @@ function GetAllArticlesPage() {
     const [error, setError] = useState(null);
     const [openDescriptionId, setOpenDescriptionId] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
-    const API_URL = import.meta.env.VITE_API_URL || '';
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
 
     const filteredPosts = posts.filter(post =>
         post.title.toLowerCase().includes(searchTerm.toLowerCase())
     );
-
 
 
     console.log(posts)
@@ -57,11 +57,11 @@ function GetAllArticlesPage() {
             setLoading(false);
         }
     };
-     const handleUpdate = async (id) => {
-         console.log("update", id);
-         setLoading(true);
-         setError(null);
-     }
+    const handleUpdate = async (id) => {
+        console.log("update", id);
+        setLoading(true);
+        setError(null);
+    }
 
 
     useEffect(() => {
@@ -87,14 +87,16 @@ function GetAllArticlesPage() {
                 {posts.length > 0 ? (
                     <ul>
                         {filteredPosts.map((post) => (
-                            <div key={post._id} className={`article ${openDescriptionId === post._id ? 'article_full' : ''}`}>
-                            <div className='article_header'>
+                            <div key={post._id}
+                                 className={`article ${openDescriptionId === post._id ? 'article_full' : ''}`}>
+                                <div className='article_header'>
                                     <strong>ID:</strong> {post._id} <br/>
                                     <strong>Category:</strong>{!isEdit ? post.category : <input/>}
-                                    <strong>Date:</strong> {post.date} | | ${post.category} <br/>
+                                    <strong>Date:</strong> {post.date} | | {post.category} <br/>
+                                    <strong>Date origin:</strong> {post.dateRaw}<br/>
                                 </div>
                                 <div className="article_description">
-                                     <p><strong>Title:</strong> {post.title}</p>
+                                    <p><strong>Title:</strong> {post.title}</p>
 
                                     <button
                                         className="btn"
