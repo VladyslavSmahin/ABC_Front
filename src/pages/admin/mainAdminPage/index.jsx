@@ -2,8 +2,8 @@ import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import "./style.scss";
 import Divider from "../../../components/divider/index.jsx";
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import MyEditor from "../../../components/AdminEditor/MyEditor.jsx";
+
 
 const MainAdminPage = () => {
     const [data, setData] = useState({
@@ -181,7 +181,7 @@ const MainAdminPage = () => {
                     onChange={(e) => handleChange(e, "title")}
                 />*/}
                 <div className="titleEditor">
-                    <CKEditor
+                    {/*<CKEditor
                         editor={ClassicEditor}
                         data={data.title}
                         onChange={(event, editor) => {
@@ -205,7 +205,11 @@ const MainAdminPage = () => {
                                 "redo",
                             ],
                         }}
-                    />
+                    />*/}
+                    <MyEditor
+                        data={data.title}
+                        onChange={(newValue) => setData(prev => ({ ...prev, title: newValue }))}
+                    ></MyEditor>
                 </div>
                 <div className="imgWrapper">
                     <div {...dropzone1_1.getRootProps()} className="dropzone">
@@ -241,7 +245,7 @@ const MainAdminPage = () => {
 
 
                 <div className="description">
-                    <CKEditor
+                    {/*<CKEditor
                         editor={ClassicEditor}
                         data={data.description}
                         onChange={(event, editor) => {
@@ -269,7 +273,11 @@ const MainAdminPage = () => {
                                 toolbar: ["imageTextAlternative", "imageStyle:full", "imageStyle:side"],
                             },
                         }}
-                    />
+                    />*/}
+                    <MyEditor
+                        data={data.description}
+                        onChange={(newValue) => setData(prev => ({ ...prev, description: newValue }))}
+                    ></MyEditor>
                 </div>
 
 
