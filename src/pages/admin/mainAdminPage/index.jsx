@@ -1,17 +1,17 @@
-import { useCallback, useState } from "react";
-import { useDropzone } from "react-dropzone";
+import {useCallback, useState} from "react";
+import {useDropzone} from "react-dropzone";
 import "./style.scss";
 import Divider from "../../../components/divider/index.jsx";
 import MyEditor from "../../../components/AdminEditor/MyEditor.jsx";
-
+import {Outlet, useNavigate} from "react-router-dom";
 
 const MainAdminPage = () => {
     const [data, setData] = useState({
         category: "",
         title: "",
         description: "",
-        date: "",      // Форматированная дата (MAY 28, 2025)
-        dateRaw: "",   // Оригинальная дата (2025-05-28)
+        date: "",
+        dateRaw: "",
         isMainArticle: "false",
     });
 
@@ -21,39 +21,42 @@ const MainAdminPage = () => {
         image8_3: null,
     });
 
+    const [showForm, setShowForm] = useState(true);
+
     const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
-
+    const navigate = useNavigate();
 
     const [uploading, setUploading] = useState(false);
 
+
     const onDrop1_1 = useCallback((acceptedFiles) => {
-        setFiles((prev) => ({ ...prev, image1_1: acceptedFiles[0] }));
+        setFiles((prev) => ({...prev, image1_1: acceptedFiles[0]}));
     }, []);
 
     const onDrop3_2 = useCallback((acceptedFiles) => {
-        setFiles((prev) => ({ ...prev, image3_2: acceptedFiles[0] }));
+        setFiles((prev) => ({...prev, image3_2: acceptedFiles[0]}));
     }, []);
 
     const onDrop8_3 = useCallback((acceptedFiles) => {
-        setFiles((prev) => ({ ...prev, image8_3: acceptedFiles[0] }));
+        setFiles((prev) => ({...prev, image8_3: acceptedFiles[0]}));
     }, []);
 
     const dropzone1_1 = useDropzone({
         onDrop: onDrop1_1,
-        accept: { "image/*": [] },
+        accept: {"image/*": []},
         maxFiles: 1,
     });
 
     const dropzone3_2 = useDropzone({
         onDrop: onDrop3_2,
-        accept: { "image/!*": [] },
+        accept: {"image/*": []},
         maxFiles: 1,
     });
 
     const dropzone8_3 = useDropzone({
         onDrop: onDrop8_3,
-        accept: { "image/!*": [] },
+        accept: {"image/*": []},
         maxFiles: 1,
     });
 
@@ -65,22 +68,18 @@ const MainAdminPage = () => {
                 year: "numeric",
                 month: "short",
                 day: "numeric",
-            }).toUpperCase(); // MAY 28, 2025
+            }).toUpperCase();
 
             setData(prev => ({
                 ...prev,
                 dateRaw: raw,
                 date: formatted
             }));
-            console.log("RAW:", raw, "FORMATTED:", formatted);
 
         } else {
-            setData({ ...data, [field]: e.target.value });
+            setData({...data, [field]: e.target.value});
         }
-
     };
-
-
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -94,7 +93,6 @@ const MainAdminPage = () => {
         formData.append("dateRaw", data.dateRaw);
         formData.append("isMainArticle", data.isMainArticle);
 
-        // Append files to FormData
         if (files.image1_1) formData.append("files", files.image1_1);
         if (files.image3_2) formData.append("files", files.image3_2);
         if (files.image8_3) formData.append("files", files.image8_3);
@@ -130,161 +128,126 @@ const MainAdminPage = () => {
         }
     };
 
+    // Новый обработчик для кнопки
+    const handleGoToAllArticles = () => {
+        setShowForm(false);
+        navigate("/admin/getAllArticles");
+    };
+
     return (
         <div className="adminPage">
-            <p className="welcome">Welcome to Admin Panel 🙂</p>
-            <Divider />
-            <form onSubmit={handleSubmit}>
-                <div className="title_dateWrapper">
-                    <select
-                        value={data.category}
-                        onChange={(e) => handleChange(e, "category")}
-                    >
-                        <option value="Home">Home</option>
-                        <option value="Analytics">Analytics</option>
-                        <option value="Reports">Reports</option>
-                        <option value="Databases">Databases</option>
-                        <option value="Digests">Digests</option>
-                        <option value="Links">Links</option>
-                    </select>
+            <span className="welcome">Welcome to Admin Panel 🙂</span>
 
-                    <div className="selectWrapper">
-                        <label htmlFor="articlePlacement">Выберите место размещения статьи на главной странице:</label>
+            {showForm ? (
+                <button className='swapAdminPagesBtn' onClick={handleGoToAllArticles}>Go to All Articles</button>
+            ) : (
+                <button className='swapAdminPagesBtn'
+                        onClick={() => {
+                            setShowForm(true);
+                            navigate("/admin");
+                        }}>
+                    Back to Form
+                </button>
+            )}
+
+            <Divider/>
+            {showForm && (
+                <form onSubmit={handleSubmit}>
+                    {/* Вся форма */}
+                    {/* ...весь твой JSX формы сюда без изменений */}
+                    <div className="title_dateWrapper">
                         <select
-                            id="articlePlacement"
-                            value={data.isMainArticle}
-                            onChange={(e) => handleChange(e, "isMainArticle")}
+                            value={data.category}
+                            onChange={(e) => handleChange(e, "category")}
                         >
-                            <option value="false">Не выбрано</option>
-                            <option value="homeArticle_1">1</option>
-                            <option value="homeArticle_2">2</option>
-                            <option value="homeArticle_3">3</option>
-                            <option value="homeArticle_4">4</option>
-                            <option value="homeArticle_5">5</option>
-                            <option value="homeArticle_6">6</option>
+                            <option value="">Выберите категорию</option>
+                            <option value="Home">Home</option>
+                            <option value="Analytics">Analytics</option>
+                            <option value="Reports">Reports</option>
+                            <option value="Databases">Databases</option>
+                            <option value="Digests">Digests</option>
+                            <option value="Links">Links</option>
                         </select>
-                    </div>
 
-                    <div className="dateWrapper">
-                        <input
-                            className="date"
-                            type="date"
-                            value={data.dateRaw}
-                            onChange={(e) => handleChange(e, "date")}
+                        <div className="selectWrapper">
+                            <label htmlFor="articlePlacement">Выберите место размещения статьи на главной
+                                странице:</label>
+                            <select
+                                id="articlePlacement"
+                                value={data.isMainArticle}
+                                onChange={(e) => handleChange(e, "isMainArticle")}
+                            >
+                                <option value="false">Не выбрано</option>
+                                <option value="homeArticle_1">1</option>
+                                <option value="homeArticle_2">2</option>
+                                <option value="homeArticle_3">3</option>
+                                <option value="homeArticle_4">4</option>
+                                <option value="homeArticle_5">5</option>
+                                <option value="homeArticle_6">6</option>
+                            </select>
+                        </div>
+
+                        <div className="dateWrapper">
+                            <input
+                                className="date"
+                                type="date"
+                                value={data.dateRaw}
+                                onChange={(e) => handleChange(e, "date")}
+                            />
+                        </div>
+                    </div>
+                    <div className="titleEditor">
+                        <MyEditor
+                            data={data.title}
+                            onChange={(newValue) => setData(prev => ({...prev, title: newValue}))}
                         />
                     </div>
-                </div>
-                {/*<textarea
-                    className="title"
-                    placeholder="Заголовок"
-                    value={data.title}
-                    onChange={(e) => handleChange(e, "title")}
-                />*/}
-                <div className="titleEditor">
-                    {/*<CKEditor
-                        editor={ClassicEditor}
-                        data={data.title}
-                        onChange={(event, editor) => {
-                            const titleData = editor.getData();
-                            setData(prev => ({ ...prev, title: titleData }));
-                        }}
-                        config={{
-                            toolbar: [
-                                "heading",
-                                "|",
-                                "bold",
-                                "italic",
-                                "link",
-                                "bulletedList",
-                                "numberedList",
-                                "|",
-                                "outdent",
-                                "indent",
-                                "|",
-                                "undo",
-                                "redo",
-                            ],
-                        }}
-                    />*/}
-                    <MyEditor
-                        data={data.title}
-                        onChange={(newValue) => setData(prev => ({ ...prev, title: newValue }))}
-                    ></MyEditor>
-                </div>
-                <div className="imgWrapper">
-                    <div {...dropzone1_1.getRootProps()} className="dropzone">
-                        <input {...dropzone1_1.getInputProps()} />
-                        {dropzone1_1.isDragActive ? (
-                            <p>Отпустите файл здесь ...</p>
-                        ) : (
-                            <p>Перетащите изображение 1:1 или кликните для выбора</p>
-                        )}
-                        {files.image1_1 && <p>Выбрано: {files.image1_1.name}</p>}
+                    <div className="imgWrapper">
+                        <div {...dropzone1_1.getRootProps()} className="dropzone">
+                            <input {...dropzone1_1.getInputProps()} />
+                            {dropzone1_1.isDragActive ? (
+                                <p>Отпустите файл здесь ...</p>
+                            ) : (
+                                <p>Перетащите изображение 1:1 или кликните для выбора</p>
+                            )}
+                            {files.image1_1 && <p>Выбрано: {files.image1_1.name}</p>}
+                        </div>
+
+                        <div {...dropzone3_2.getRootProps()} className="dropzone">
+                            <input {...dropzone3_2.getInputProps()} />
+                            {dropzone3_2.isDragActive ? (
+                                <p>Отпустите файл здесь ...</p>
+                            ) : (
+                                <p>Перетащите изображение 3:2 или кликните для выбора</p>
+                            )}
+                            {files.image3_2 && <p>Выбрано: {files.image3_2.name}</p>}
+                        </div>
+
+                        <div {...dropzone8_3.getRootProps()} className="dropzone">
+                            <input {...dropzone8_3.getInputProps()} />
+                            {dropzone8_3.isDragActive ? (
+                                <p>Отпустите файл здесь ...</p>
+                            ) : (
+                                <p>Перетащите изображение 8:3 или кликните для выбора</p>
+                            )}
+                            {files.image8_3 && <p>Выбрано: {files.image8_3.name}</p>}
+                        </div>
                     </div>
 
-                    <div {...dropzone3_2.getRootProps()} className="dropzone">
-                        <input {...dropzone3_2.getInputProps()} />
-                        {dropzone3_2.isDragActive ? (
-                            <p>Отпустите файл здесь ...</p>
-                        ) : (
-                            <p>Перетащите изображение 3:2 или кликните для выбора</p>
-                        )}
-                        {files.image3_2 && <p>Выбрано: {files.image3_2.name}</p>}
+                    <div className="description">
+                        <MyEditor
+                            data={data.description}
+                            onChange={(newValue) => setData(prev => ({...prev, description: newValue}))}
+                        />
                     </div>
 
-                    <div {...dropzone8_3.getRootProps()} className="dropzone">
-                        <input {...dropzone8_3.getInputProps()} />
-                        {dropzone8_3.isDragActive ? (
-                            <p>Отпустите файл здесь ...</p>
-                        ) : (
-                            <p>Перетащите изображение 8:3 или кликните для выбора</p>
-                        )}
-                        {files.image8_3 && <p>Выбрано: {files.image8_3.name}</p>}
-                    </div>
-                </div>
+                    <button type="submit" disabled={uploading}>
+                        {uploading ? "Загрузка..." : "Send Article"}
+                    </button>
+                </form>
+            )}
 
-
-                <div className="description">
-                    {/*<CKEditor
-                        editor={ClassicEditor}
-                        data={data.description}
-                        onChange={(event, editor) => {
-                            const dataEditor = editor.getData();
-                            setData(prev => ({ ...prev, description: dataEditor }));
-                        }}
-                        config={{
-                            toolbar: [
-                                "heading",
-                                "|",
-                                "bold",
-                                "italic",
-                                "link",
-                                "bulletedList",
-                                "numberedList",
-                                "|",
-                                "outdent",
-                                "indent",
-                                "|",
-                                "imageUpload",
-                                "undo",
-                                "redo",
-                            ],
-                            image: {
-                                toolbar: ["imageTextAlternative", "imageStyle:full", "imageStyle:side"],
-                            },
-                        }}
-                    />*/}
-                    <MyEditor
-                        data={data.description}
-                        onChange={(newValue) => setData(prev => ({ ...prev, description: newValue }))}
-                    ></MyEditor>
-                </div>
-
-
-                <button type="submit" disabled={uploading}>
-                    {uploading ? "Загрузка..." : "Send Article"}
-                </button>
-            </form>
+            <Outlet/>
         </div>
     );
 };

@@ -1,8 +1,10 @@
 import {useState, useEffect} from "react"; // Добавляем useEffect для начальной загрузки
 import './style.scss';
 import Divider from "../../../components/divider/index.jsx";
+import {useNavigate} from "react-router-dom";
 
-function GetAllArticlesPage() {
+
+function GetAllArticlesPage( ) {
     const [isEdit, setIsEdit] = useState(false);
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -11,13 +13,13 @@ function GetAllArticlesPage() {
     const [searchTerm, setSearchTerm] = useState('');
     const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
+    const navigate = useNavigate();
 
     const filteredPosts = posts.filter(post =>
         post.title.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
 
-    console.log(posts)
     const fetchPosts = async () => {
         setLoading(true);
         setError(null);
@@ -27,7 +29,6 @@ function GetAllArticlesPage() {
                 throw new Error("Ошибка при получении постов");
             }
             const data = await response.json();
-            console.log(data.isChecked)
             setPosts(data);
         } catch (err) {
             setError(err.message);
@@ -37,7 +38,6 @@ function GetAllArticlesPage() {
     };
 
     const handleDelete = async (id) => {
-        console.log("delete", id);
 
         setLoading(true);
         setError(null);
@@ -57,11 +57,6 @@ function GetAllArticlesPage() {
             setLoading(false);
         }
     };
-    const handleUpdate = async (id) => {
-        console.log("update", id);
-        setLoading(true);
-        setError(null);
-    }
 
 
     useEffect(() => {
@@ -87,45 +82,60 @@ function GetAllArticlesPage() {
                 {posts.length > 0 ? (
                     <ul>
                         {filteredPosts.map((post) => (
-                            <div key={post._id}
-                                 className={`article ${openDescriptionId === post._id ? 'article_full' : ''}`}>
-                                <div className='article_header'>
-                                    <strong>ID:</strong> {post._id} <br/>
-                                    <strong>Category:</strong>{!isEdit ? post.category : <input/>}
-                                    <strong>Date:</strong> {post.date} | | {post.category} <br/>
-                                    <strong>Date origin:</strong> {post.dateRaw}<br/>
+                            <div
+                                key={post._id}
+                                className={`article ${openDescriptionId === post._id ? "article_full" : ""}`}
+                            >
+                                <div className="article_header">
+                                    <strong>ID:</strong> {post._id} <br />
+                                    <strong>Title:</strong> {post.title}
                                 </div>
-                                <div className="article_description">
-                                    <p><strong>Title:</strong> {post.title}</p>
 
-                                    <button
-                                        className="btn"
-                                        onClick={() =>
-                                            setOpenDescriptionId(openDescriptionId === post._id ? null : post._id)
-                                        }
-                                    >
-                                        {openDescriptionId === post._id ? 'Скрыть' : 'Показать описание'}
-                                    </button>
+                                <button
+                                    className="btn"
+                                    onClick={() =>
+                                        setOpenDescriptionId(openDescriptionId === post._id ? null : post._id)
+                                    }
+                                >
+                                    {openDescriptionId === post._id ? "Скрыть" : "Показать описание"}
+                                </button>
 
-                                    {openDescriptionId === post._id && <p>{post.description}</p>}
+                                {openDescriptionId === post._id && (
+                                    <>
+                                        <div>
+                                            <strong>Category:</strong> {!isEdit ? post.category : <input />}
+                                        </div>
+                                        <div>
+                                            <strong>Date:</strong> {post.date} | | {post.category}
+                                        </div>
+                                        <div>
+                                            <strong>Date origin:</strong> {post.dateRaw}
+                                        </div>
+                                        <div className="article_images">
+                                            <strong>Images:</strong> {post.imageUrl1_1}, {post.imageUrl3_2}, {post.imageUrl8_3}
+                                        </div>
+                                        <div className="article_isMain">
+                                            <strong>isMainArticle:</strong> {post.isMainArticle}
+                                        </div>
+                                        <div className="article_description">
+                                            <p>{post.description}</p>
+                                        </div>
+                                        <div className={`article_btn_wrapper`}>
+                                            <button className={`btn`} onClick={() => handleDelete(post._id)}>
+                                                Delete
+                                            </button>
 
-                                </div>
-                                <div className='article_images'>
-                                    <strong>Images:</strong> {post.imageUrl1_1}, {post.imageUrl3_2}, {post.imageUrl8_3}
-                                </div>
-                                <div className='article_isMain'>
-                                    <strong>isMainArticle:</strong> {post.isMainArticle}
-                                </div>
-                                <div className={`article_btn_wrapper`}>
-                                    <button className={`btn`} onClick={() => handleDelete(post._id)}>Delete</button>
-
-                                    <button className={`btn`} onClick={() => handleUpdate(post._id)}>Update</button>
-                                </div>
-                                <Divider/>
+                                            <button className={`btn`} onClick={() => navigate(`/admin/changeArticle/${post._id}`)}>
+                                                Edit
+                                            </button>
+                                        </div>
+                                        <Divider />
+                                    </>
+                                )}
                             </div>
-
                         ))}
                     </ul>
+
                 ) : !loading && !error && <p>Нет постов для отображения</p>}
             </div>
         </div>

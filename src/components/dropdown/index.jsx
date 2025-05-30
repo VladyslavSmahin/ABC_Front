@@ -10,7 +10,6 @@ const Dropdown = ({
         <div className={`dropdown ${className ? className : ''}`}>
             <select className='admin-page-select' value={value} onChange={onChange}>
                 {options.map(option => {
-                    console.log(option)
                     return <option key={option.value} value={option.value}>{option.label}</option>;
                 })}
             </select>

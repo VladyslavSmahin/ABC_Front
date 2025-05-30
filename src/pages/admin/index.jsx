@@ -1,8 +1,10 @@
+/*
 import './style.scss'
 import MainAdminPage from "./mainAdminPage/index.jsx";
 import { useState } from "react";
 import GetAllPosts from "./getAllArticles/index.jsx";
 import Dropdown from "../../components/dropdown/index.jsx";
+import ChangePost from "./changePost/index.jsx";
 
 function AdminPage() {
     const [page, setPage] = useState("mainPage");
@@ -21,9 +23,10 @@ function AdminPage() {
                 options={[{value: 'mainPage', label: 'Main Page'}, {value: 'allPosts', label: 'All Posts'}]}
             />
             {page === "mainPage" && <MainAdminPage />}
-            {page === "allPosts" && <GetAllPosts/>}
+            {page === "allPosts" && <GetAllPosts setPage={setPage}/>}
+
         </div>
     );
 }
 
-export default AdminPage;
+export default AdminPage;*/

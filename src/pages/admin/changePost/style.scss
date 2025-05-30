@@ -2,7 +2,7 @@ $primary-color: rgb(143, 140, 140);
 $btn-color: rgb(184, 178, 178);
 
 
-.adminPage {
+.adminPage_changePost {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -13,19 +13,13 @@ $btn-color: rgb(184, 178, 178);
   font-size: 20px;
   min-height: 100%;
 
-  .swapAdminPagesBtn {
-    padding: 10px;
-    margin: 5px;
-    background: $primary-color;
-  }
-
   .welcome {
     text-align: center;
     padding: 10px;
     font-size: 20px;
     border: 1px black solid;
-    border-radius: 10px;
-    margin: 10px;
+    border-radius: 20px;
+    margin: 20px;
     background: $primary-color;
     color: black;
     width: 100%;
@@ -62,6 +56,7 @@ $btn-color: rgb(184, 178, 178);
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 50px;
 
     select {
       background: $btn-color;
@@ -77,8 +72,7 @@ $btn-color: rgb(184, 178, 178);
       height: 100%;
       width: 100%;
       margin-bottom: 10px;
-
-      .ck.ck-editor__editable_inline > :last-child {
+      .ck.ck-editor__editable_inline>:last-child {
         min-height: 400px;
       }
     }

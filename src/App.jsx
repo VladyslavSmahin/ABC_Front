@@ -8,14 +8,18 @@ import Digests from "./pages/digests/index.jsx";
 import Forecasts from "./pages/forecasts/index.jsx";
 import Links from "./pages/links/index.jsx";
 import Reports from "./pages/reports/index.jsx";
-import Admin from "./pages/admin/index.jsx";
-import Divider from "./components/divider/index.jsx";
 import PrivacyPolicy from "./pages/privacyPolicy/index.jsx";
 import TermsAndConditions from "./pages/termsAndConditions/index.jsx";
 import CookiePolicy from "./pages/cookiePolicy/index.jsx";
-import Post from "./components/article/index.jsx";
 import Article from "./components/article/index.jsx";
+import MainAdminPage from "./pages/admin/mainAdminPage/index.jsx";
+import ChangePost from "./pages/admin/changePost/index.jsx";
+import GetAllArticlesPage from "./pages/admin/getAllArticles/index.jsx";
 
+
+function GetAllPosts() {
+    return null;
+}
 
 function App() {
     return (
@@ -43,7 +47,10 @@ function App() {
                 <Route path="/privacyPolicy" element={<MainLayout>< PrivacyPolicy/></MainLayout>} />
                 <Route path="/termsAndConditions" element={<MainLayout>< TermsAndConditions/></MainLayout>} />
                 <Route path="/cookiePolicy" element={<MainLayout>< CookiePolicy/></MainLayout>} />
-                <Route path="/admin" element={< Admin/>} />
+                <Route path="/admin" element={<MainAdminPage/>} >
+                    <Route path="getAllArticles" element={<GetAllArticlesPage />} />
+                    <Route path="changeArticle/:postId" element={<ChangePost/>} />
+                </Route>
             </Routes>
         </BrowserRouter>
     );
