@@ -62,12 +62,14 @@
     @media (min-width: 320px) and (max-width: 1200px) {
       padding-top: calc(20px + 40 * (100vw - 320px) / 880);
       padding-bottom: calc(20px + 40 * (100vw - 320px) / 880);
+      gap: calc(10px + 20 * (100vw - 320px) / 880);
     }
     @media (max-width: 1080px) {
       flex-direction: column;
     }
 
     .dividerSection2RightTextWrapper {
+      height: 2px;
       @media (min-width: 1081px) {
         display: none;
       }
@@ -82,6 +84,12 @@
 
       .homeSection2TextWrapper1 {
         margin-bottom: 20px;
+      }
+
+      .homeSection2TextWrapper2 {
+        @media (min-width: 320px) and (max-width: 1080px) {
+          margin-bottom: 0px;
+        }
       }
 
       .logoHomeSection2 {

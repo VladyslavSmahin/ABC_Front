@@ -101,23 +101,26 @@ const Home = ({className = '', truncateHtml}) => {
                     <div className='homeSection2LeftTextWrapper container'>
                         {mainArticle1 ? (
                             <>
-                                <img
-                                    src={mainArticle1.imageUrl3_2 || mainArticle1.imageUrl1_1}
-                                    alt='main article'
-                                    className='logoHomeSection2'
-                                />
+                                <Link to={`${mainArticle1.category}/post/${mainArticle1._id}`}>
+                                    <img
+                                        src={mainArticle1.imageUrl3_2 || mainArticle1.imageUrl1_1}
+                                        alt='main article'
+                                        className='logoHomeSection2'
+                                    />
+                                </Link>
                                 <div className='homeSection2TextWrapper homeSection2TextWrapper1'>
                                     <p className='photoDate'>{mainArticle1.date} | {mainArticle1.category}</p>
-                                    <Link to={`${mainArticle1.category}/post/${mainArticle1._id}`}
-                                          className='photoDescription'
-                                          dangerouslySetInnerHTML={{ __html: mainArticle1.title || 'пусто' }}
-                                    >
-                                    </Link>
+                                    <Link
+                                        to={`${mainArticle1.category}/post/${mainArticle1._id}`}
+                                        className='photoDescription'
+                                        dangerouslySetInnerHTML={{ __html: mainArticle1.title || 'пусто' }}
+                                    />
                                 </div>
                             </>
                         ) : (
                             <p>Нет главной статьи</p>
                         )}
+
                         {mainArticle2 ? (
                             <div className='homeSection2TextWrapper homeSection2TextWrapper2'>
                                 <p className='photoDate'>{mainArticle2.date} | {mainArticle2.category}</p>
