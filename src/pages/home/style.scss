@@ -59,7 +59,10 @@
     gap: 30px;
     padding: 60px 0;
     margin: 0 auto;
-
+    @media (min-width: 320px) and (max-width: 1200px) {
+      padding-top: calc(20px + 40 * (100vw - 320px) / 880);
+      padding-bottom: calc(20px + 40 * (100vw - 320px) / 880);
+    }
     @media (max-width: 1080px) {
       flex-direction: column;
     }
@@ -78,7 +81,7 @@
       }
 
       .homeSection2TextWrapper1 {
-        margin-bottom: 50px;
+        margin-bottom: 20px;
       }
 
       .logoHomeSection2 {
@@ -106,7 +109,7 @@
     .homeSection2TextWrapper {
       display: flex;
       flex-direction: column;
-      margin-bottom: 20px;
+      //margin-bottom: 20px;
 
       .photoDate {
         margin-bottom: 15px;

@@ -5,36 +5,115 @@
     margin-bottom: 40px;
   }
 
+  .FollowUsDivider {
+  width: 100%;
+  }
+
   .getInTouchContent {
     display: flex;
     justify-content: space-between;
+    @media (min-width: 320px) and (max-width: 767px) {
+      flex-direction: column;
+    }
 
     .getInTouchContent_leftColumn {
+      max-width: 70%;
+      @media (min-width: 320px) and (max-width: 767px) {
+        max-width: 100%;
+      }
+
+      h3 {
+        text-transform: uppercase;
+        margin-bottom: 20px;
+      }
+
+      p {
+        margin-bottom: 20px;
+      }
 
       .getInTouchForm {
         display: flex;
         flex-direction: column;
         align-items: center;
+        @media (min-width: 320px) and (max-width: 767px) {
+          margin-bottom: 30px;
+        }
+        label {
+          display: none;
+        }
+
+        input, textarea {
+          border-radius: 15px;
+          padding: 10px;
+          background: #d3d0d0;
+          border: none;
+        }
+
+        .nameWrapper {
+          margin-bottom: 20px;
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+        }
+
+        textarea {
+          width: 100%;
+          min-height: 150px;
+          margin-bottom: 20px;
+        }
+
+        #email {
+          width: 100%;
+          margin-bottom: 20px;
+        }
+
+        #firstName {
+          width: 47%;
+        }
+
+        #lastName {
+          width: 47%;
+        }
+
+        .getInTouchButton {
+          border-radius: 15px;
+          padding: 10px 70px;
+          background: black;
+          color: white;
+        }
       }
     }
 
     .getInTouchContent_rightColumn {
       display: flex;
       flex-direction: column;
+      @media (min-width: 320px) and (max-width: 767px) {
+        align-items: center;
+      }
 
       h3 {
-
+        text-transform: uppercase;
+        margin-bottom: 20px;
       }
 
       .socialsContainer {
         display: flex;
         flex-direction: column;
+        @media (min-width: 500px) and (max-width: 767px) {
+          flex-direction: row;
+        }
 
         .socials {
           display: flex;
+          align-items: center;
+          margin-bottom: 20px;
+          @media (min-width: 500px) and (max-width: 767px) {
+            margin-right: 20px;
+          }
 
           img {
-            margin-right: 30px;
+            margin-right: 20px;
+            max-width: 30px;
           }
 
           p {
