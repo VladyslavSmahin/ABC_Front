@@ -129,7 +129,7 @@
             //right: calc(600px + 530 * (100vw - 1920px) / 1080);
           }
           @media (min-width: 1080px) and (max-width: 1920px) {
-          //right: calc(310px + 290 * (100vw - 1080px) / 860);
+            //right: calc(310px + 290 * (100vw - 1080px) / 860);
           }
         }
 
@@ -166,6 +166,7 @@
           border: none;
           font-size: 48px;
           z-index: 11;
+          color: black !important;
 
           @media (min-width: 320px) and (max-width: 1080px) {
             width: calc(30px + 40 * (100vw - 320px) / 760);
@@ -177,8 +178,10 @@
             display: none;
           }
         }
-        .searchLi{
+
+        .searchLi {
           position: relative;
+
           .searchResults {
             position: absolute;
             top: 28px;
@@ -209,7 +212,6 @@
             }
           }
         }
-
 
 
       }

@@ -198,21 +198,23 @@ const Home = ({className = '', truncateHtml}) => {
                 <section className='homeSection3 container'>
                     {randomArticles.map((article, index) => (
                         <div key={article._id || index} className='homeSection3CardWrapper'>
-                            <img
-                                src={article.imageUrl1_1}
-                                alt='article img'
-                                className='homeSection3CardWrapperPhoto'
-                            />
-                            <p className='photoDate'>{article.date} | {article.category}</p>
-                            <Link to={`${article.category}/post/${article._id}`}
-                                  className='photoDescription'
-                                  /*dangerouslySetInnerHTML={{ __html: article.title || 'пусто' }}*/
-                                  dangerouslySetInnerHTML={{ __html: truncateHtml(article.title || 'пусто', 100) }}
-                            >
+                            <Link to={`${article.category}/post/${article._id}`}>
+                                <img
+                                    src={article.imageUrl1_1}
+                                    alt='article img'
+                                    className='homeSection3CardWrapperPhoto'
+                                />
                             </Link>
+                            <p className='photoDate'>{article.date} | {article.category}</p>
+                            <Link
+                                to={`${article.category}/post/${article._id}`}
+                                className='photoDescription'
+                                dangerouslySetInnerHTML={{ __html: truncateHtml(article.title || 'пусто', 100) }}
+                            />
                         </div>
                     ))}
                 </section>
+
                 <Divider />
                 <section className='homeSection4 container'>
                     <p className='homeSection4Text'><span>ABC Political Studies</span> is an emerging think tank rooted

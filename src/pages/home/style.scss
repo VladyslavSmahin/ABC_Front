@@ -109,13 +109,19 @@
     .homeSection2TextWrapper {
       display: flex;
       flex-direction: column;
-      //margin-bottom: 20px;
+
+      @media (min-width: 320px) and (max-width: 1080px) {
+        margin-bottom: 20px;
+      }
 
       .photoDate {
         margin-bottom: 15px;
       }
     }
 
+    .homeSection2TextWrapper6 {
+      margin-bottom: 0;
+    }
   }
 
   .homeSection3 {
@@ -136,12 +142,16 @@
       flex-direction: column;
       align-items: flex-start;
 
+      @media (min-width: 320px) and (max-width: 767px) {
+        align-items: center;
+      }
+
       .homeSection3CardWrapperPhoto {
         align-self: center;
         border-radius: 20px;
         margin-bottom: 25px;
         max-width: 360px;
-
+        width: 100%;
         @media (min-width: 1080px) and (max-width: 1920px) {
           margin-bottom: calc(15px + 10 * (100vw - 1080px) / 840);
           max-width: calc(240px + 120 * (100vw - 1080px) / 840);
