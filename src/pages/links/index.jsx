@@ -1,17 +1,15 @@
-
 import './style.scss'
-import {useEffect} from "react";
 import ArticleHeader from "../../components/article/articleHeader/index.jsx";
 import {categoryList} from "../../data/data.js";
-import {Link, Outlet, useParams} from "react-router-dom";
+import {Outlet, useParams} from "react-router-dom";
 import PreviewArticle from "../../components/previewArticle/index.jsx";
 
-const Links = ({  }) => {
-
+const Links = ({ truncateHtml }) => {
+    const { postId } = useParams();
     return (
         <div className='container'>
             <ArticleHeader category={categoryList.links} />
-            <PreviewArticle category={categoryList.links}/>
+            {!postId && <PreviewArticle truncateHtml={truncateHtml} category={categoryList.links}/>}
             <Outlet />
         </div>
     );

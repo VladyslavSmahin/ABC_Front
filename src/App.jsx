@@ -67,20 +67,20 @@ function App() {
                 <Route path="/analytics" element={<MainLayout><Analytics truncateHtml={truncateHtml} /></MainLayout>}>
                     <Route path="post/:postId" element={<Article/>} />
                 </Route>
-                <Route path="/reports" element={<MainLayout><Reports /></MainLayout>}>
+                <Route path="/reports" element={<MainLayout><Reports truncateHtml={truncateHtml} /></MainLayout>}>
                     <Route path="post/:postId" element={<Article/>} />
                 </Route>
-                <Route path="/forecasts" element={<MainLayout><Forecasts /></MainLayout>}>
+                <Route path="/forecasts" element={<MainLayout><Forecasts truncateHtml={truncateHtml} /></MainLayout>}>
                     <Route path="post/:postId" element={<Article/>} />
                 </Route>
-                <Route path="/databases" element={<MainLayout><Databases /></MainLayout>}>
+                <Route path="/databases" element={<MainLayout><Databases truncateHtml={truncateHtml} /></MainLayout>}>
                     <Route path="post/:postId" element={<Article/>} />
                 </Route>
-                <Route path="/digests" element={<MainLayout><Digests /></MainLayout>}>
+                <Route path="/digests" element={<MainLayout><Digests truncateHtml={truncateHtml} /></MainLayout>}>
                     <Route path="post/:postId" element={<Article/>} />
                 </Route>
-                <Route path="/links" element={<MainLayout><Links /></MainLayout>}>
-                    <Route path="post/:postId" element={<Article/>} />
+                <Route path="/links" element={<MainLayout><Links truncateHtml={truncateHtml} /></MainLayout>}>
+                <Route path="post/:postId" element={<Article/>} />
                 </Route>
                 <Route path="/privacyPolicy" element={<MainLayout>< PrivacyPolicy/></MainLayout>} />
                 <Route path="/termsAndConditions" element={<MainLayout>< TermsAndConditions/></MainLayout>} />

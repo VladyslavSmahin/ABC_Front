@@ -31,9 +31,10 @@
     letter-spacing: -0.05em;
     font-variant: all-small-caps;
     color: #000;
-    padding-top: 10px;
+    padding-top: 7px;
     @media (min-width: 320px) and (max-width: 1200px) {
       font-size: calc(10px + 20 * ( 100vw - 320px) / 880);
+      padding-top: calc(4px + 3 * ( 100vw - 320px) / 880);
     }
   }
 }

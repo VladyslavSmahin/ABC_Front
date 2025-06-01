@@ -5,12 +5,12 @@ import {categoryList} from "../../data/data.js";
 import {Outlet, useParams} from "react-router-dom";
 import PreviewArticle from "../../components/previewArticle/index.jsx";
 
-const Databases = () => {
+const Databases = ({truncateHtml}) => {
     const { postId } = useParams();
     return (
         <div className='container'>
             <ArticleHeader category={categoryList.databases} />
-            {!postId && <PreviewArticle category={categoryList.databases} />}
+            {!postId && <PreviewArticle truncateHtml={truncateHtml} category={categoryList.databases} />}
             <Outlet />
         </div>
     );
