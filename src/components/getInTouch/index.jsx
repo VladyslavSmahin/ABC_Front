@@ -36,7 +36,7 @@ const GetInTouch = ({className = ''}) => {
                     <h3>Follow Us</h3>
                     <div className='socialsContainer'>
                         <div className='socials'>
-                            <img src='/images/x-icon.svg' alt='socials'/>
+                            <img src='/images/X-icon.svg' alt='socials'/>
                             <p className='socialText'> twitter | X</p>
                         </div>
                         <div className='socials'>
