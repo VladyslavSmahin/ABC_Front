@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import './style.scss';
 import { Link } from "react-router-dom";
 
-const PreviewArticle = ({ className, category }) => {
+const PreviewArticle = ({ className, category, truncateHtml }) => {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -16,7 +16,7 @@ const PreviewArticle = ({ className, category }) => {
             try {
                 const response = await fetch(`${API_URL}/articles`);
                 if (!response.ok) {
-                    throw new Error("Ошибка при получении постов");
+                    throw new Error("Error while retrieving posts");
                 }
                 const data = await response.json();
                 const filtered = category
@@ -33,14 +33,14 @@ const PreviewArticle = ({ className, category }) => {
         fetchPosts();
     }, [category]);
 
-    if (loading) return <p>Загрузка...</p>;
+    if (loading) return <p>Loading...</p>;
     if (error) return <p style={{ color: 'red' }}>Ошибка: {error}</p>;
     if (posts.length === 0) return <p>Нет подходящих статей для {category}</p>;
 
     const [firstPost, ...otherPosts] = posts;
 
     return (
-        <div className={`previewArticleWrapper ${className}`}>
+        <div className={`previewArticleWrapper container ${className}`}>
             <div className="previewArticleMain">
                 <Link to={`post/${firstPost._id}`}>
                     <img src={firstPost.imageUrl8_3 ? firstPost.imageUrl8_3 : firstPost.imageUrl3_2} alt='img 8.3' />
@@ -56,8 +56,11 @@ const PreviewArticle = ({ className, category }) => {
                         <Link to={`post/${post._id}`}>
                             <img src={post.imageUrl1_1} alt='img 1.1' />
                             <p className='photoDate'>{post.date}</p>
-                            <h4 className='photoDescription'
-                                dangerouslySetInnerHTML={{ __html: post.title || 'пусто' }}></h4>
+                            <h4
+                                className='photoDescription'
+                                dangerouslySetInnerHTML={{ __html: truncateHtml(post.title || 'пусто', 70) }}
+                            ></h4>
+
                         </Link>
                     </div>
                 ))}

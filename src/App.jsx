@@ -16,17 +16,55 @@ import MainAdminPage from "./pages/admin/mainAdminPage/index.jsx";
 import ChangePost from "./pages/admin/changePost/index.jsx";
 import GetAllArticlesPage from "./pages/admin/getAllArticles/index.jsx";
 
-
-function GetAllPosts() {
-    return null;
-}
-
 function App() {
+
+    function truncateHtml(html, maxLength = 50) {
+        const tempElement = document.createElement("div");
+        tempElement.innerHTML = html;
+
+        let result = '';
+        let currentLength = 0;
+        let done = false;
+
+        function walk(node) {
+            if (done) return;
+
+            if (node.nodeType === Node.TEXT_NODE) {
+                const remaining = maxLength - currentLength;
+                const text = node.nodeValue;
+
+                if (text.length <= remaining) {
+                    result += text;
+                    currentLength += text.length;
+                } else {
+                    result += text.slice(0, remaining) + '...';
+                    currentLength = maxLength;
+                    done = true;
+                }
+            } else if (node.nodeType === Node.ELEMENT_NODE) {
+                const tag = node.tagName.toLowerCase();
+                result += `<${tag}>`;
+                for (const child of node.childNodes) {
+                    walk(child);
+                    if (done) break;
+                }
+                result += `</${tag}>`;
+            }
+        }
+
+        for (const child of tempElement.childNodes) {
+            walk(child);
+            if (done) break;
+        }
+
+        return result;
+    }
+
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<MainLayout><Home /></MainLayout>} />
-                <Route path="/analytics" element={<MainLayout><Analytics /></MainLayout>}>
+                <Route path="/" element={<MainLayout><Home truncateHtml={truncateHtml} /></MainLayout>} />
+                <Route path="/analytics" element={<MainLayout><Analytics truncateHtml={truncateHtml} /></MainLayout>}>
                     <Route path="post/:postId" element={<Article/>} />
                 </Route>
                 <Route path="/reports" element={<MainLayout><Reports /></MainLayout>}>

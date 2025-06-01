@@ -5,12 +5,12 @@
   justify-content: center;
 
   .previewArticleMain {
-    display: flex;
-    flex-direction: column;
+    width: 100%;
+    max-width: 1200px;
     margin-bottom: 50px;
 
     img {
-      width: 1200px;
+      width: 100%;
       height: auto;
       border-radius: 10px;
       display: block;
@@ -24,7 +24,7 @@
   }
 
   .previewArticleSmallContainer {
-    width: 1200px;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -33,13 +33,19 @@
     .previewArticleSmall {
       width: calc(33.333% - 24.66px); // чтобы учесть промежутки между карточками
       box-sizing: border-box;
+      @media (max-width: 767px) {
+        width: calc(50% - 14.66px);
+      }
 
       img {
         width: 100%;
-        height: 340px;
+        height: auto;
         margin-bottom: 20px;
         border-radius: 10px;
         object-fit: cover;
+        @media (min-width: 320px) and (max-width: 1900px) {
+          // width: calc(320px + 880 * ( 100vw - 320px) / 1580);
+        }
       }
 
       p {

@@ -95,7 +95,7 @@ const Article = () => {
                 const response = await fetch(`${API_URL}/articles/${postId}`);
 
                 if (!response.ok) {
-                    throw new Error("Ошибка при получении статьи");
+                    throw new Error("Error while retrieving posts");
                 }
                 const data = await response.json();
                 setArticle(data);
@@ -109,8 +109,8 @@ const Article = () => {
         fetchArticle();
     }, [postId]);
 
-    if (loading) return <p className='loading'>Загрузка статьи...</p>;
-    if (error) return <p style={{color: 'red'}}>Ошибка: {error}</p>;
+    if (loading) return <p className='loading'>Loading article...</p>;
+    if (error) return <p style={{color: 'red'}}>Error: {error}</p>;
     if (!article) return null;
     console.log("article", article);
     return (

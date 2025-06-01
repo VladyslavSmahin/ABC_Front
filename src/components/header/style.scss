@@ -143,14 +143,14 @@
           right: 150px;
           top: 0px;
           width: 3px;
-          height: 164px;
+          height: 160px;
           background: black;
           @media (min-width: 320px) and (max-width: 1920px) {
             width: calc(1px + 2 * (100vw - 320px) / 1600);
           }
           @media (min-width: 320px) and (max-width: 1080px) {
             right: calc(50px + 100 * (100vw - 320px) / 760);
-            height: calc(66px + 98 * (100vw - 320px) / 760);
+            height: calc(63px + 98 * (100vw - 320px) / 760);
           }
           @media (min-width: 1080px) {
             display: none;

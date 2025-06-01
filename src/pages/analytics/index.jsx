@@ -4,7 +4,7 @@ import { categoryList } from "../../data/data.js";
 import { Link, Outlet, useParams, useNavigate } from "react-router-dom";
 import PreviewArticle from "../../components/previewArticle/index.jsx";
 
-const Analytics = ({ className }) => {
+const Analytics = ({ className, truncateHtml }) => {
     const { postId } = useParams();
     const navigate = useNavigate(); // Для программной навигации
 
@@ -20,7 +20,7 @@ const Analytics = ({ className }) => {
                     <img src='/images/arrow.png' className='arrowDescription' alt='arrow'/>
                 </span>
             )}
-            {!postId && <PreviewArticle category={categoryList.analytics} />}
+            {!postId && <PreviewArticle truncateHtml={truncateHtml} category={categoryList.analytics} />}
             <Outlet />
         </div>
     );

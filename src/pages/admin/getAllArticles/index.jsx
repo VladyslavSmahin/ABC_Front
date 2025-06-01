@@ -77,7 +77,7 @@ function GetAllArticlesPage( ) {
             </div>
 
             <div className='allPostsWrapper'>
-                {loading && <p>Загрузка...</p>}
+                {loading && <p>Loading...</p>}
                 {error && <p style={{color: 'red'}}>Ошибка: {error}</p>}
                 {posts.length > 0 ? (
                     <ul>

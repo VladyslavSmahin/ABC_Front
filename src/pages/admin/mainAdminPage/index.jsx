@@ -242,7 +242,7 @@ const MainAdminPage = () => {
                     </div>
 
                     <button type="submit" disabled={uploading}>
-                        {uploading ? "Загрузка..." : "Send Article"}
+                        {uploading ? "Loading..." : "Send Article"}
                     </button>
                 </form>
             )}

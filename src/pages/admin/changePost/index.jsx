@@ -309,7 +309,7 @@ const ChangePost = () => {
 
 
                 <button type="submit" disabled={uploading}>
-                    {uploading ? "Загрузка..." : "Обновить статью"}
+                    {uploading ? "Loading..." : "Update"}
                 </button>
 
 

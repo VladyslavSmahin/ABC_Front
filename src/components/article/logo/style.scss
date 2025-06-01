@@ -2,6 +2,13 @@
   display: flex;
   max-width: 240px;
   align-items: center;
+  @media (min-width: 320px) and (max-width: 1080px) {
+    max-width: calc(76px + 138 * ( 100vw - 320px) / 760);
+  }
+  @media (min-width: 1080px) and (max-width: 1200px) {
+    max-width: calc(214px + 26 * ( 100vw - 1080px) / 120);
+  }
+
 
   p:nth-child(1){
     font-family: 'Raleway-700', sans-serif;
@@ -12,7 +19,9 @@
     font-variant: all-small-caps;
     color: #000;
     margin-right: 4px;
-
+    @media (min-width: 320px) and (max-width: 1200px) {
+      font-size: calc(20px + 50 * ( 100vw - 320px) / 880);
+    }
   }
   p:nth-child(2){
     font-family: 'Raleway-400', sans-serif;
@@ -23,5 +32,8 @@
     font-variant: all-small-caps;
     color: #000;
     padding-top: 10px;
+    @media (min-width: 320px) and (max-width: 1200px) {
+      font-size: calc(10px + 20 * ( 100vw - 320px) / 880);
+    }
   }
 }

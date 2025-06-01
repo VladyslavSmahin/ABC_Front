@@ -3,7 +3,7 @@ import Divider from "../../components/divider/index.jsx";
 import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 
-const Home = ({className = ''}) => {
+const Home = ({className = '', truncateHtml}) => {
     const [isDesktop, setIsDesktop] = useState(window.innerWidth > 1080);
     const [mainArticle1, setMainArticle1] = useState(null);
     const [mainArticle2, setMainArticle2] = useState(null);
@@ -83,7 +83,7 @@ const Home = ({className = ''}) => {
         fetchArticles();
     }, []);
 
-    if (loading) return <p>Загрузка...</p>;
+    if (loading) return <p>Loading...</p>;
     if (error) return <p style={{ color: 'red' }}>Ошибка: {error}</p>;
 
     return (
@@ -206,7 +206,8 @@ const Home = ({className = ''}) => {
                             <p className='photoDate'>{article.date} | {article.category}</p>
                             <Link to={`${article.category}/post/${article._id}`}
                                   className='photoDescription'
-                                  dangerouslySetInnerHTML={{ __html: article.title || 'пусто' }}
+                                  /*dangerouslySetInnerHTML={{ __html: article.title || 'пусто' }}*/
+                                  dangerouslySetInnerHTML={{ __html: truncateHtml(article.title || 'пусто', 100) }}
                             >
                             </Link>
                         </div>
