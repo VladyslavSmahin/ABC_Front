@@ -19,9 +19,7 @@ const PreviewArticle = ({ className, category, truncateHtml }) => {
                     throw new Error("Error while retrieving posts");
                 }
                 const data = await response.json();
-                const filtered = category
-                    ? data.filter(post => post.category === category)
-                    : data;
+                const filtered = category ? data.filter(post => post.category === category) : data;
                 setPosts(filtered);
             } catch (err) {
                 setError(err.message);

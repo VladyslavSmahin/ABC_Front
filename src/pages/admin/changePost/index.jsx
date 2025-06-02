@@ -30,7 +30,7 @@ const ChangePost = () => {
 
     useEffect(() => {
         if (location.state?.article) {
-            setData(location.state.article); // устанавливаем данные статьи в форму
+            setData(location.state.article);
         }
     }, [location.state]);
 

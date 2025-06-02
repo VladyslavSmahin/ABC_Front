@@ -12,11 +12,13 @@
     max-height: 50px;
     font-size: 16px;
     border-radius: 5px;
-    margin-bottom: 30px;
+    margin: 0 10px 0 0;
   }
 
   .getAllPosts_header {
     display: flex;
+    align-items: center;
+    padding: 10px 0;
     input{
       margin: 0 20px;
       height: 30px;
