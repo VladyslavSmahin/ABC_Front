@@ -9,6 +9,7 @@ const Header = ({className = ''}) => {
     const [searchResults, setSearchResults] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
     const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+    const [isFocused, setIsFocused] = useState(false);
 
     const handleClick = () => {
         setIsOpen(!isOpen);
@@ -81,13 +82,15 @@ const Header = ({className = ''}) => {
                         <li><Link to='/links' className='linkTo linkToLinks'>Links</Link></li>
                         <li className="searchLi">
                             <input
-                                type='text'
-                                placeholder='Search by name'
-                                className='headerInput'
+                                type="text"
+                                placeholder="Search by name"
+                                className="headerInput"
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
+                                onFocus={() => setIsFocused(true)}
+                                onBlur={() => setIsFocused(false)}
                             />
-                            {searchTerm.length > 0 && (
+                            {searchTerm.length > 0 && isFocused && (
                                 <div className="searchResults">
                                     {searchTerm.length < 3 ? (
                                         <div className="searchResultItem">Please enter at least 3 characters</div>
