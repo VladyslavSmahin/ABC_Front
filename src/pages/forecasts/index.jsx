@@ -4,7 +4,7 @@ import {categoryList} from "../../data/data.js";
 import {Outlet, useParams} from "react-router-dom";
 import PreviewArticle from "../../components/previewArticle/index.jsx";
 
-const Forecasts = ( truncateHtml) => {
+const Forecasts = ({truncateHtml}) => {
     const { postId } = useParams();
 
     return (

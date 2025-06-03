@@ -65,26 +65,26 @@ function App() {
             <Routes>
                 <Route path="/" element={<MainLayout><Home truncateHtml={truncateHtml} /></MainLayout>} />
                 <Route path="/analytics" element={<MainLayout><Analytics truncateHtml={truncateHtml} /></MainLayout>}>
-                    <Route path="post/:postId" element={<Article/>} />
+                    <Route path="post/:postId" element={<Article/>}/>
                 </Route>
                 <Route path="/reports" element={<MainLayout><Reports truncateHtml={truncateHtml} /></MainLayout>}>
-                    <Route path="post/:postId" element={<Article/>} />
+                    <Route path="post/:postId" element={<Article/>}/>
                 </Route>
                 <Route path="/forecasts" element={<MainLayout><Forecasts truncateHtml={truncateHtml} /></MainLayout>}>
-                    <Route path="post/:postId" element={<Article/>} />
+                    <Route path="post/:postId" element={<Article/>}/>
                 </Route>
                 <Route path="/databases" element={<MainLayout><Databases truncateHtml={truncateHtml} /></MainLayout>}>
-                    <Route path="post/:postId" element={<Article/>} />
+                    <Route path="post/:postId" element={<Article/>}/>
                 </Route>
                 <Route path="/digests" element={<MainLayout><Digests truncateHtml={truncateHtml} /></MainLayout>}>
-                    <Route path="post/:postId" element={<Article/>} />
+                    <Route path="post/:postId" element={<Article/>}/>
                 </Route>
                 <Route path="/links" element={<MainLayout><Links truncateHtml={truncateHtml} /></MainLayout>}>
-                <Route path="post/:postId" element={<Article/>} />
+                <Route path="post/:postId" element={<Article/>}/>
                 </Route>
-                <Route path="/privacyPolicy" element={<MainLayout>< PrivacyPolicy/></MainLayout>} />
-                <Route path="/termsAndConditions" element={<MainLayout>< TermsAndConditions/></MainLayout>} />
-                <Route path="/cookiePolicy" element={<MainLayout>< CookiePolicy/></MainLayout>} />
+                <Route path="/privacyPolicy" element={<MainLayout><PrivacyPolicy/></MainLayout>} />
+                <Route path="/termsAndConditions" element={<MainLayout><TermsAndConditions/></MainLayout>} />
+                <Route path="/cookiePolicy" element={<MainLayout><CookiePolicy/></MainLayout>} />
                 <Route path="/admin" element={<MainAdminPage/>} >
                     <Route path="getAllArticles" element={<GetAllArticlesPage />} />
                     <Route path="changeArticle/:postId" element={<ChangePost/>} />

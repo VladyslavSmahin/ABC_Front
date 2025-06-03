@@ -1,9 +1,9 @@
 export const categoryList =
     {
-        analytics: 'Analytics',
-        reports: 'Reports',
-        forecasts: 'Forecasts',
-        databases: 'Databases',
-        digests: 'Digests',
-        links: 'Links'
+        analytics: 'analytics',
+        reports: 'reports',
+        forecasts: 'forecasts',
+        databases: 'databases',
+        digests: 'digests',
+        links: 'links',
     }
