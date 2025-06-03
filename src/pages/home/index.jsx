@@ -35,7 +35,16 @@ const Home = ({className = '', truncateHtml}) => {
                 }
                 const data = await response.json();
 
-                const sortedData = data.sort((a, b) => new Date(b.date) - new Date(a.date));
+                const activeArticles = data.filter((post) => {
+                    const currentDate = new Date();
+                    currentDate.setHours(0, 0, 0, 0); // Сбрасываем время для сравнения только дат
+                    const publishDate = new Date(post.dateRaw);
+                    publishDate.setHours(0, 0, 0, 0); // Сбрасываем время для dateRaw
+                    return publishDate <= currentDate;
+                });
+                const nonDeletedArticles = activeArticles.filter((post) => !post.isDeleted);
+
+                const sortedData = nonDeletedArticles.sort((a, b) => new Date(b.date) - new Date(a.date));
 
 
                 const main1 = sortedData.find(post => post.isMainArticle === "homeArticle_1");
@@ -71,8 +80,9 @@ const Home = ({className = '', truncateHtml}) => {
                 // Перемешиваем оставшиеся статьи случайным образом
                 const shuffledArticles = availableArticles.sort(() => Math.random() - 0.5);
 
-                // Берем первые 6 статей (или меньше, если их меньше)
+
                 setRandomArticles(shuffledArticles.slice(0, 6));
+                console.log(shuffledArticles)
             } catch (err) {
                 setError(err.message);
             } finally {

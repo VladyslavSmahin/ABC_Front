@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import './style.scss';
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 
 const PreviewArticle = ({ className, category, truncateHtml }) => {
     const [posts, setPosts] = useState([]);
@@ -19,7 +19,18 @@ const PreviewArticle = ({ className, category, truncateHtml }) => {
                     throw new Error("Error while retrieving posts");
                 }
                 const data = await response.json();
-                const filtered = category ? data.filter(post => post.category === category) : data;
+
+                const activeArticles = data.filter((post) => {
+                    const currentDate = new Date();
+                    currentDate.setHours(0, 0, 0, 0); // Сбрасываем время для сравнения только дат
+                    const publishDate = new Date(post.dateRaw);
+                    publishDate.setHours(0, 0, 0, 0); // Сбрасываем время для dateRaw
+                    return publishDate <= currentDate;
+                });
+
+                const articles = activeArticles.filter((post) => !post.isDeleted);
+
+                const filtered = category ? articles.filter(post => post.category === category) : articles;
                 setPosts(filtered);
             } catch (err) {
                 setError(err.message);

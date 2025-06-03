@@ -6,20 +6,14 @@ import {useNavigate} from "react-router-dom";
 
 function GetAllArticlesPage() {
     const [showDeleted, setShowDeleted] = useState(false);
+    const [showScheduled, setShowScheduled] = useState(false);
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [openDescriptionId, setOpenDescriptionId] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
     const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-
     const navigate = useNavigate();
-
-    const filteredPosts = posts.filter(post => {
-        const matchDeleted = showDeleted ? post.isDeleted : !post.isDeleted;
-        const matchSearch = post.title.toLowerCase().includes(searchTerm.toLowerCase());
-        return matchDeleted && matchSearch;
-    });
 
     const fetchPosts = async () => {
         setLoading(true);
@@ -38,6 +32,22 @@ function GetAllArticlesPage() {
         }
     };
 
+    const filteredPosts = posts.filter((post) => {
+        const currentDate = new Date();
+        currentDate.setHours(0, 0, 0, 0); // Сбрасываем время для сравнения только дат
+        const publishDate = new Date(post.dateRaw);
+        publishDate.setHours(0, 0, 0, 0); // Сбрасываем время для dateRaw
+        const isPublished = publishDate <= currentDate;
+
+        // Единая переменная для фильтрации
+        const matchCondition =
+            (!showDeleted && !showScheduled && isPublished && !post.isDeleted) || // Активные
+            (showDeleted && post.isDeleted) || // Удаленные
+            (showScheduled && !isPublished && !post.isDeleted); // Отложенные
+
+        const matchSearch = post.title.toLowerCase().includes(searchTerm.toLowerCase());
+        return matchCondition && matchSearch;
+    });
     const handleDelete = async (id) => {
         setLoading(true);
         setError(null);
@@ -106,17 +116,28 @@ function GetAllArticlesPage() {
             <div className="getAllPosts_header">
                 <button className='getAllPostsBtn' onClick={() => {
                     setShowDeleted(false);
+                    setShowScheduled(false);
                     fetchPosts();
                 }}>
                     Get active articles
                 </button>
                 <button className='getAllPostsBtn getAllDeletedPostsBtn' onClick={() => {
                     setShowDeleted(true);
+                    setShowScheduled(false);
                     fetchPosts();
                 }}>Get
                     deleted articles
                 </button>
-
+                <button
+                    className="getAllPostsBtn getAllScheduledPostsBtn"
+                    onClick={() => {
+                        setShowDeleted(false);
+                        setShowScheduled(true);
+                        fetchPosts();
+                    }}
+                >
+                    Get scheduled articles
+                </button>
                 <input
                     type="text"
                     placeholder="Поиск по заголовку"
