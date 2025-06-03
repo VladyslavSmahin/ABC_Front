@@ -74,12 +74,12 @@ const Header = ({className = ''}) => {
                             <h2>Alps-Balkans-Carpathians</h2>
                             <h3>Political Studies</h3>
                         </li>
-                        <li><Link to='/analytics' className='linkTo linkToAnalytics'>Analytics</Link></li>
-                        <li><Link to='/reports' className='linkTo linkToReports'>Reports</Link></li>
-                        <li><Link to='/forecasts' className='linkTo linkToForecasts'>Forecasts</Link></li>
-                        <li><Link to='/databases' className='linkTo linkToDatabases'>Databases</Link></li>
-                        <li><Link to='/digests' className='linkTo linkToDigests'>Digests</Link></li>
-                        <li><Link to='/links' className='linkTo linkToLinks'>Links</Link></li>
+                        <li><Link to='/Analytics' className='linkTo linkToAnalytics'>Analytics</Link></li>
+                        <li><Link to='/Reports' className='linkTo linkToReports'>Reports</Link></li>
+                        <li><Link to='/Forecasts' className='linkTo linkToForecasts'>Forecasts</Link></li>
+                        <li><Link to='/Databases' className='linkTo linkToDatabases'>Databases</Link></li>
+                        <li><Link to='/Digests' className='linkTo linkToDigests'>Digests</Link></li>
+                        <li><Link to='/Links' className='linkTo linkToLinks'>Links</Link></li>
                         <li className="searchLi">
                             <input
                                 type="text"

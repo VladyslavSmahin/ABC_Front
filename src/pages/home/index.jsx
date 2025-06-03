@@ -87,6 +87,7 @@ const Home = ({className = '', truncateHtml}) => {
     if (error) return <p style={{ color: 'red' }}>Ошибка: {error}</p>;
 
     return (
+
         <div className={`homeWrapper ${className}`}>
             <div className='home '>
                 <section className='homeSection1 container'>

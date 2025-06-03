@@ -112,7 +112,7 @@ const Article = () => {
     if (loading) return <p className='loading'>Loading article...</p>;
     if (error) return <p style={{color: 'red'}}>Error: {error}</p>;
     if (!article) return null;
-    console.log("article", article);
+
     return (
         <div className="postWrapper">
             <div className="post container">
