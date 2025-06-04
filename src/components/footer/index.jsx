@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import Divider from "../divider/index.jsx";
 import GetInTouch from "../getInTouch/index.jsx";
 
-const Footer = ({  }) => {
+const Footer = () => {
     return (
         <div className='footer'>
             <GetInTouch/>
