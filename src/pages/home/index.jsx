@@ -82,7 +82,7 @@ const Home = ({className = '', truncateHtml}) => {
 
 
                 setRandomArticles(shuffledArticles.slice(0, 6));
-                console.log(shuffledArticles)
+
             } catch (err) {
                 setError(err.message);
             } finally {
