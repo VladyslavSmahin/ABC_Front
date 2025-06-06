@@ -228,14 +228,16 @@
     left: -1300px;
     top: 140px;
     display: none;
+    z-index: 10;
+    transition: left 0.3s ease;
+    border: 1px solid black;
+
     @media (min-width: 320px) and (max-width: 1080px) {
       display: block;
       top: calc(63px + 77 * (100vw - 320px) / 760);
     }
 
-    z-index: 10;
-    transition: left 0.3s ease; // Анимация по оси X
-    border: 1px solid black;
+
 
     ul {
       display: flex;
@@ -329,5 +331,19 @@
 
   .burgerMenuOpen {
     left: 0; // Выезжает влево
+  }
+}
+.burgerHeaderInput {
+  background: rgb(255, 255, 255) url('/images/search-icon.svg') no-repeat right 10px center;
+  border: none;
+  border-radius: 10px;
+  padding: 5px 30px 5px 10px;
+  width: 100%;
+  box-sizing: border-box;
+
+  &:focus {
+    padding: 8px 30px 8px 10px;
+    transform: scale(1.01);
+    outline: none;
   }
 }
