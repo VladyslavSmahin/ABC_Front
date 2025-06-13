@@ -15,6 +15,7 @@
 
     @media (max-width: 900px) {
       flex-direction: column;
+      padding: 40px 0 60px;
     }
 
     ul {
@@ -82,26 +83,74 @@
     }
 
     .footerRight {
-      max-width: 215px;
+      max-width: 40%;
       width: 100%;
       display: flex;
       justify-content: space-between;
       align-items: center;
 
-      @media (min-width: 320px) and (max-width: 1920px) {
-        max-width: calc(100px + 115 * ( 100vw - 320px) / 1600);
+      @media (min-width: 320px) and (max-width: 900px) {
+       flex-direction: column;
+        top: 0px;
+        left: -60px;
       }
 
 
-      .footerLogo {
-        cursor: pointer;
-        font-family: 'Raleway-700', sans-serif;
-        text-decoration: none;
-        color: var(--color-black);
-        text-transform: uppercase;
+
+
+      .footerLogo{
+        display: flex;
+        align-items: center;
+        position: relative;
+        top: -20px;
+        left: -130px;
+        @media (min-width: 320px) and (max-width: 900px) {
+          top: 10px;
+          left: -60px;
+        }
+
+
+        p:nth-child(1){
+          font-family: 'Raleway-700', sans-serif;
+          font-weight: 700;
+          font-size:40px;
+          line-height: 91%;
+          letter-spacing: -0.05em;
+          font-variant: all-small-caps;
+          color: #000;
+          position: absolute;
+          top: 0;
+          left: 0;
+          @media (min-width: 320px) and (max-width: 1200px) {
+            font-size: calc(20px + 20 * ( 100vw - 320px) / 880);
+          }
+        }
+        p:nth-child(2){
+          font-family: 'Raleway-400', sans-serif;
+          font-weight: 400;
+          font-size: 15px;
+          line-height: 74%;
+          letter-spacing: -0.05em;
+          font-variant: all-small-caps;
+          color: #000;
+          position: absolute;
+          top: 3px;
+          left: 70px;
+          @media (min-width: 320px) and (max-width: 1200px) {
+            font-size: calc(10px + 5 * ( 100vw - 320px) / 880);
+
+          }
+          @media (min-width: 320px) and (max-width: 900px) {
+            font-size: calc(10px + 5 * ( 100vw - 320px) / 580);
+            top: -1px;
+            left: 60px;
+          }
+        }
       }
+
       .number{
         font-weight: 700;
+        font-size: 9px;
       }
 
     }

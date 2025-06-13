@@ -1,8 +1,8 @@
 import './style.scss'
 
-const Logo = () => {
+const Logo = ({className}) => {
     return (
-        <div className='logo'>
+        <div className={`logo ${className}`}>
             <p>ABC</p>
             <p>political studies</p>
         </div>
