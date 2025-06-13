@@ -111,6 +111,13 @@ function GetAllArticlesPage() {
         fetchPosts();
     }, []);
 
+    function stripHtmlTags(html) {
+        const temp = document.createElement('div');
+        temp.innerHTML = html;
+        return temp.textContent || temp.innerText || '';
+    }
+
+
     return (
         <div className="GetAllArticlesPage">
             <div className="getAllPosts_header">
@@ -159,15 +166,31 @@ function GetAllArticlesPage() {
                             >
                                 <div className="article_header">
                                     <strong>ID:</strong> {post._id} <br/>
-                                    <strong>Title:</strong> {post.title}
+                                    <strong>Title:</strong> <p >{stripHtmlTags(post.title || 'пусто')}</p>
                                 </div>
+                                <div className={`article_btn_wrapper`}>
+                                    {showDeleted ?
+                                        <button className={`btn`} onClick={() => handleRestore(post._id)}>
+                                            Restore
+                                        </button>
+                                        :
+                                        <button className={`btn`} onClick={() => handleDelete(post._id)}>
+                                            Delete
+                                        </button>
+                                    }
 
+                                    <button className={`btn`}
+                                            onClick={() => navigate(`/admin/changeArticle/${post._id}`)}>
+                                        Edit
+                                    </button>
+                                </div>
                                 <button
                                     className="btn"
                                     onClick={() =>
                                         setOpenDescriptionId(openDescriptionId === post._id ? null : post._id)
                                     }
                                 >
+
                                     {openDescriptionId === post._id ? "Скрыть" : "Показать описание"}
                                 </button>
 
@@ -193,24 +216,9 @@ function GetAllArticlesPage() {
                                             <strong>deletedAt:</strong> {post.deletedAt}
                                         </div>
                                         <div className="article_description">
-                                            <p>{post.description}</p>
+                                            <p>{stripHtmlTags(post.description || 'пусто')}</p>
                                         </div>
-                                        <div className={`article_btn_wrapper`}>
-                                            {showDeleted ?
-                                                <button className={`btn`} onClick={() => handleRestore(post._id)}>
-                                                    Restore
-                                                </button>
-                                                :
-                                                <button className={`btn`} onClick={() => handleDelete(post._id)}>
-                                                    Delete
-                                                </button>
-                                            }
 
-                                            <button className={`btn`}
-                                                    onClick={() => navigate(`/admin/changeArticle/${post._id}`)}>
-                                                Edit
-                                            </button>
-                                        </div>
                                         <Divider/>
                                     </>
                                 )}
