@@ -1,0 +1,17 @@
+.readMoreCard{
+  flex: 1 1 0;
+  max-width: calc(50% - 10px);
+  .readMoreCardPhoto{
+    width: 100%;
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+  .readMoreCardPhotoDate{
+    color: black;
+    margin-bottom: 10px;
+  }
+  .readMoreCardTitle{
+    color: black;
+    font-weight: 500;
+  }
+}

@@ -1,13 +1,15 @@
-import './style.scss'
+import './style.scss';
+import { Link } from 'react-router-dom';
 
-const ReadMoreCard = ({className = '',readMoreCardPhotoDate, readMoreCardTitle, src, alt}) => {
-
+const ReadMoreCard = ({ className = '', readMoreCardPhotoDate, readMoreCardTitle, srcImg, altImg, to }) => {
     return (
-        <div className={`readMoreCard ${className}`}>
-            <img className='readMoreCardPhotoDate' src={src} alt={alt}/>
-            <p className='readMoreCardPhotoDate'>{readMoreCardPhotoDate}</p>
-            <p className='readMoreCardTitle'>{readMoreCardTitle}</p>
-        </div>
+        <Link to={to}  className={`readMoreCard ${className}`}>
+            <img className='readMoreCardPhoto' src={srcImg} alt={altImg} />
+            <p className='readMoreCardPhotoDate photoDate'
+               dangerouslySetInnerHTML={{__html: readMoreCardPhotoDate || 'пусто'}}></p>
+            <p className='readMoreCardTitle photoDescription'
+               dangerouslySetInnerHTML={{__html: readMoreCardTitle || 'пусто'}}></p>
+        </Link>
     );
 };
 

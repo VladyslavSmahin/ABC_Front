@@ -70,17 +70,21 @@
       line-height: 112%;
       color: #000;
       margin-right: 3px;
+      margin-bottom: 10px;
 
-      .postReadMoreContent {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 50px;
-      }
     }
   }
-  .loading{
+
+  .loading {
     font-family: 'Raleway-700', sans-serif;
     font-weight: 700;
     font-size: 35px;
   }
+}
+
+.postReadMoreContent {
+  display: flex;
+  gap: 20px;
+  flex-wrap: nowrap;
+
 }
