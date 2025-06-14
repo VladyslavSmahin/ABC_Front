@@ -10,7 +10,7 @@ const PreviewArticle = ({ className, category, truncateHtml }) => {
 
 
 
-    useEffect(() => {
+   /* useEffect(() => {
         const fetchPosts = async () => {
             setLoading(true);
             try {
@@ -40,8 +40,48 @@ const PreviewArticle = ({ className, category, truncateHtml }) => {
         };
 
         fetchPosts();
-    }, [category]);
+    }, [category]);*/
 
+    useEffect(() => {
+        const fetchPosts = async () => {
+            setLoading(true);
+            try {
+                const response = await fetch(`${API_URL}/articles`);
+                if (!response.ok) {
+                    throw new Error("Error while retrieving posts");
+                }
+                const data = await response.json();
+
+                const currentDate = new Date();
+                currentDate.setHours(0, 0, 0, 0); // обнуление времени
+
+                const activeArticles = data.filter(post => {
+                    const publishDate = new Date(post.dateRaw);
+                    publishDate.setHours(0, 0, 0, 0);
+                    return publishDate <= currentDate;
+                });
+
+                const articles = activeArticles.filter(post => !post.isDeleted);
+
+                const filtered = category
+                    ? articles.filter(post => post.category === category)
+                    : articles;
+
+                // Сортировка от самых свежих к старым
+                const sorted = filtered.sort((a, b) => new Date(b.dateRaw) - new Date(a.dateRaw));
+
+                setPosts(sorted);
+            } catch (err) {
+                setError(err.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchPosts();
+    }, [API_URL, category]);
+
+    
     if (loading) return <p>Loading...</p>;
     if (error) return <p style={{ color: 'red' }}>Ошибка: {error}</p>;
     if (posts.length === 0) return <p>Нет подходящих статей для {category}</p>;

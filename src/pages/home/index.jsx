@@ -89,7 +89,11 @@ const Home = ({className = '', truncateHtml}) => {
                 const shuffledArticles = availableArticles.sort(() => Math.random() - 0.5);
 
 
-                setRandomArticles(shuffledArticles.slice(0, 6));
+                const topRandomArticles = availableArticles
+                    .sort((a, b) => new Date(b.dateRaw) - new Date(a.dateRaw))
+                    .slice(0, 6);
+
+                setRandomArticles(topRandomArticles);
 
             } catch (err) {
                 setError(err.message);
