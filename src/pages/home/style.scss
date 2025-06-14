@@ -111,12 +111,13 @@
     .homeSection2RightTextWrapper {
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      //justify-content: space-between;
     }
 
     .homeSection2TextWrapper {
       display: flex;
       flex-direction: column;
+      margin-bottom: 30px;
 
       @media (min-width: 320px) and (max-width: 1080px) {
         margin-bottom: 20px;
@@ -183,10 +184,6 @@
 
         }
       }
-
-      .photoDescription {
-
-      }
     }
   }
 
@@ -239,5 +236,14 @@
   }
   @media (min-width: 320px) and (max-width: 1080px) {
     font-size: calc(14px + 6 * (100vw - 320px) / 760);
+  }
+}
+.photoDescriptionMain{
+  font-size: 32px;
+  @media (min-width: 1080px) and (max-width: 1920px) {
+    font-size: calc(25px + 7 * (100vw - 1080px) / 840);
+  }
+  @media (min-width: 320px) and (max-width: 1080px) {
+    font-size: calc(18px + 7 * (100vw - 320px) / 760);
   }
 }

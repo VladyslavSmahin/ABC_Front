@@ -132,7 +132,7 @@ const Home = ({className = '', truncateHtml}) => {
                                     <p className='photoDate'>{mainArticle1.date} | {mainArticle1.category}</p>
                                     <Link
                                         to={`${mainArticle1.category}/post/${mainArticle1._id}`}
-                                        className='photoDescription'
+                                        className='photoDescription photoDescriptionMain'
                                         dangerouslySetInnerHTML={{ __html: mainArticle1.title || 'пусто' }}
                                     />
                                 </div>
@@ -141,6 +141,10 @@ const Home = ({className = '', truncateHtml}) => {
                             <p>Нет главной статьи</p>
                         )}
 
+
+                    </div>
+                    <Divider className="dividerSection2RightTextWrapper" />
+                    <div className='homeSection2RightTextWrapper container'>
                         {mainArticle2 ? (
                             <div className='homeSection2TextWrapper homeSection2TextWrapper2'>
                                 <p className='photoDate'>{mainArticle2.date} | {mainArticle2.category}</p>
@@ -156,9 +160,6 @@ const Home = ({className = '', truncateHtml}) => {
                                 <Link to='/post' className='photoDescription'>Статья 2</Link>
                             </div>
                         )}
-                    </div>
-                    <Divider className="dividerSection2RightTextWrapper" />
-                    <div className='homeSection2RightTextWrapper container'>
                         {mainArticle3 ? (
                             <div className='homeSection2TextWrapper homeSection2TextWrapper3'>
                                 <p className='photoDate'>{mainArticle3.date} | {mainArticle3.category}</p>
