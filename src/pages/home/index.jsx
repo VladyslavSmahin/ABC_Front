@@ -25,6 +25,7 @@ const Home = ({className = '', truncateHtml}) => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
+
     useEffect(() => {
         const fetchArticles = async () => {
             setLoading(true);
@@ -46,23 +47,30 @@ const Home = ({className = '', truncateHtml}) => {
 
                 const sortedData = nonDeletedArticles.sort((a, b) => new Date(b.date) - new Date(a.date));
 
+                console.log(sortedData);
 
-                const main1 = sortedData.find(post => post.isMainArticle === "homeArticle_1");
+                const pickLatest = (articles, key) => {
+                    return articles
+                        .filter(post => post.isMainArticle === key)
+                        .sort((a, b) => new Date(b.dateRaw) - new Date(a.dateRaw))[0] || null;
+                };
+
+                const main1 = pickLatest(sortedData, "homeArticle_1");
                 setMainArticle1(main1);
 
-                const main2 = sortedData.find(post => post.isMainArticle === "homeArticle_2");
+                const main2 = pickLatest(sortedData, "homeArticle_2");
                 setMainArticle2(main2);
 
-                const main3 = sortedData.find(post => post.isMainArticle === "homeArticle_3");
+                const main3 = pickLatest(sortedData, "homeArticle_3");
                 setMainArticle3(main3);
 
-                const main4 = sortedData.find(post => post.isMainArticle === "homeArticle_4");
+                const main4 = pickLatest(sortedData, "homeArticle_4");
                 setMainArticle4(main4);
 
-                const main5 = sortedData.find(post => post.isMainArticle === "homeArticle_5");
+                const main5 = pickLatest(sortedData, "homeArticle_5");
                 setMainArticle5(main5);
 
-                const main6 = sortedData.find(post => post.isMainArticle === "homeArticle_6");
+                const main6 = pickLatest(sortedData, "homeArticle_6");
                 setMainArticle6(main6);
 
                 // Фильтруем статьи, исключая те, что уже используются в homeSection2
@@ -95,6 +103,7 @@ const Home = ({className = '', truncateHtml}) => {
 
     if (loading) return <p>Loading...if you wait more than 2 seconds : you are in free mode, the server is sleeping. it takes 30 seconds to wake up. After 15 minutes of inactivity it becomes inactive</p>;
     if (error) return <p style={{ color: 'red' }}>Ошибка: {error}</p>;
+
 
     return (
 
