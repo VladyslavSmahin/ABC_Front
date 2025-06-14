@@ -36,6 +36,7 @@
         h3 {
           text-transform: uppercase;
           font-family: 'Raleway-700', sans-serif;
+          white-space: nowrap;
         }
 
         h4 {
@@ -238,7 +239,8 @@
     font-size: calc(14px + 6 * (100vw - 320px) / 760);
   }
 }
-.photoDescriptionMain{
+
+.photoDescriptionMain {
   font-size: 32px;
   @media (min-width: 1080px) and (max-width: 1920px) {
     font-size: calc(25px + 7 * (100vw - 1080px) / 840);
