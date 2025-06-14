@@ -22,6 +22,13 @@
     font-style: normal;
 }
 
+
+@font-face {
+    font-family: 'Roboto Light';
+    src: url('./assets/fonts/Roboto/Roboto-Light.ttf') format('truetype');
+    font-style: normal;
+}
+
 .number {
     font-family: 'OpenSans-300', sans-serif;
     text-decoration: none;

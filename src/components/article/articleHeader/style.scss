@@ -7,4 +7,9 @@
     margin-bottom: calc(20px + 20 * ( 100vw - 320px) / 880);
     margin-top: calc(20px + 20 * ( 100vw - 320px) / 880);
   }
+  .articleHeaderWrapperLogo{
+    @media (min-width: 320px) and (max-width: 1080px) {
+      display: none;
+    }
+  }
 }

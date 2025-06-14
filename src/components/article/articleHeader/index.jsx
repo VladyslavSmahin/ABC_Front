@@ -9,7 +9,7 @@ const ArticleHeader = ({className = '', category}) => {
         <div className={`articleHeaderWrapper ${className}`}>
 
             <Category text={category}/>
-            <Logo/>
+            <Logo className='articleHeaderWrapperLogo'/>
 
         </div>
     );

@@ -3,6 +3,7 @@ import ArticleHeader from "../../components/article/articleHeader/index.jsx";
 import { categoryList } from "../../data/data.js";
 import { Link, Outlet, useParams, useNavigate } from "react-router-dom";
 import PreviewArticle from "../../components/previewArticle/index.jsx";
+import ClickToBackBtn from "../../components/clickToBackBtn/index.jsx";
 
 const Analytics = ({ className, truncateHtml }) => {
     const { postId } = useParams();
@@ -16,8 +17,7 @@ const Analytics = ({ className, truncateHtml }) => {
                     className="back-arrow"
                     onClick={() => navigate(-1)}
                 >
-
-                    <img src='/images/arrow.png' className='arrowDescription' alt='arrow'/>
+                    <ClickToBackBtn/>
                 </span>
             )}
             {!postId && <PreviewArticle truncateHtml={truncateHtml} category={categoryList.analytics} />}
