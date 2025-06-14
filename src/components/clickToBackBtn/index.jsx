@@ -17,7 +17,7 @@ const ClickToBackBtn = ({className}) => {
 
     return (
         <div className={`clickToBackBtn ${isFixed ? 'fixed' : 'static'} ${className}`}>
-            <img src='../../../public/images/arrow.svg' alt='arrow' />
+            <img src='/images/arrow.svg' alt='arrow' />
             <p>back</p>
         </div>
     );
