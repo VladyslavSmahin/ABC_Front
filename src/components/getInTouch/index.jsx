@@ -1,8 +1,26 @@
 import './style.scss'
 import Divider from "../divider/index.jsx";
-import { useMediaQuery } from 'react-responsive';
 const GetInTouch = ({className = ''}) => {
-    const isMobile = useMediaQuery({ maxWidth: 767 });
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const formData = {
+            firstName: e.target.firstName.value,
+            lastName: e.target.lastName.value,
+            email: e.target.email.value,
+            message: e.target.message.value,
+        };
+
+        await fetch('https://abc-back.onrender.com/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData),
+        });
+
+        alert('Message sent!');
+    };
+
 
     return (
         <div className={`getInTouch ${className}`} id='getInTouch'>
@@ -12,7 +30,7 @@ const GetInTouch = ({className = ''}) => {
                     <h3>Get in touch</h3>
                     <p>If you have any questions or would you like to submit an article for consideration, feel free for
                         reach out to us</p>
-                    <form className='getInTouchForm'>
+                    <form className='getInTouchForm'  onSubmit={handleSubmit}>
                         <div className='nameWrapper'>
                             <label htmlFor="firstName"></label>
                             <input id="firstName" type="text" placeholder="Name"/>

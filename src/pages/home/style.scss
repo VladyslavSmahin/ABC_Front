@@ -125,7 +125,7 @@
       }
 
       .photoDate {
-        margin-bottom: 15px;
+        margin-bottom: 8px;
       }
     }
 
@@ -159,15 +159,16 @@
       .homeSection3CardWrapperPhoto {
         align-self: center;
         border-radius: 20px;
-        margin-bottom: 25px;
+        margin-bottom: 10px;
         max-width: 360px;
         width: 100%;
+
         @media (min-width: 1080px) and (max-width: 1920px) {
-          margin-bottom: calc(15px + 10 * (100vw - 1080px) / 840);
+          //margin-bottom: calc(15px + 10 * (100vw - 1080px) / 840);
           max-width: calc(240px + 120 * (100vw - 1080px) / 840);
         }
         @media (min-width: 768px) and (max-width: 1080px) {
-          margin-bottom: calc(10px + 5 * (100vw - 768px) / 312);
+         // margin-bottom: calc(10px + 5 * (100vw - 768px) / 312);
           max-width: calc(330px + 100 * (100vw - 768px) / 312);
         }
         @media (min-width: 320px) and (max-width: 767px) {
