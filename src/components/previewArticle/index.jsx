@@ -84,7 +84,7 @@ const PreviewArticle = ({ className, category, truncateHtml }) => {
     
     if (loading) return <p>Loading...</p>;
     if (error) return <p style={{ color: 'red' }}>Ошибка: {error}</p>;
-    if (posts.length === 0) return <p>Нет подходящих статей для {category}</p>;
+    if (posts.length === 0) return <p>There are no matching articles for {category}</p>;
 
     const [firstPost, ...otherPosts] = posts;
 
