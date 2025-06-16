@@ -48,7 +48,7 @@ const GetInTouch = ({ className = '' }) => {
                 <div className='getInTouchContent_leftColumn'>
                     <h3>Get in touch</h3>
                     <p>If you have any questions or would you like to submit an article for consideration, feel free to reach out to us</p>
-                    <form className='getInTouchForm'>
+                    <form className='getInTouchForm' onSubmit={handleSubmit}>
                         <div className='nameWrapper'>
                             <label htmlFor="firstName"></label>
                             <input id="firstName" type="text" placeholder="Name" value={formData.firstName} onChange={handleChange} />
