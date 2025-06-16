@@ -3,6 +3,9 @@ import './style.scss';
 import Divider from "../divider/index.jsx";
 
 const GetInTouch = ({ className = '' }) => {
+
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -19,7 +22,7 @@ const GetInTouch = ({ className = '' }) => {
         e.preventDefault();
 
         try {
-            const res = await fetch("https://abc-back.onrender.com/contact", {
+            const res = await fetch(`${API_URL}/contact`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
