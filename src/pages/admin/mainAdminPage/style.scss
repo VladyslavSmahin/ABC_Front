@@ -110,6 +110,9 @@ $btn-color: rgb(184, 178, 178);
     .titleEditor {
       width: 100%;
       height: auto;
+      .tox{
+        max-height: 200px;
+      }
     }
 
     .imgWrapper {

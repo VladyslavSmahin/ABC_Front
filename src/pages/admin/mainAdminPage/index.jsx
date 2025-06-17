@@ -4,6 +4,7 @@ import "./style.scss";
 import Divider from "../../../components/divider/index.jsx";
 import MyEditor from "../../../components/AdminEditor/MyEditor.jsx";
 import {Outlet, useNavigate} from "react-router-dom";
+import TinyEditor from "../../../components/AdminEditor/TinyEditor.jsx";
 
 const MainAdminPage = () => {
     const [data, setData] = useState({
@@ -197,7 +198,7 @@ const MainAdminPage = () => {
                         </div>
                     </div>
                     <div className="titleEditor">
-                        <MyEditor
+                        <TinyEditor
                             data={data.title}
                             onChange={(newValue) => setData(prev => ({...prev, title: newValue}))}
                         />
@@ -235,10 +236,13 @@ const MainAdminPage = () => {
                     </div>
 
                     <div className="description">
-                        <MyEditor
+                        {/*<MyEditor
                             data={data.description}
                             onChange={(newValue) => setData(prev => ({...prev, description: newValue}))}
-                        />
+                        />*/}
+                        <TinyEditor
+                            data={data.description}
+                            onChange={(newValue) => setData(prev => ({...prev, description: newValue}))}></TinyEditor>
                     </div>
 
                     <button type="submit" disabled={uploading}>
