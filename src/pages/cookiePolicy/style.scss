@@ -1,0 +1,11 @@
+.cookie{
+  .category{
+    p{
+      font-size: 50px;
+      @media (min-width: 320px) and (max-width: 1420px) {
+        font-size: calc(20px + 30 * (100vw - 320px) / 1100);
+      }
+    }
+
+  }
+}
