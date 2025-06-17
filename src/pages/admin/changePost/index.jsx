@@ -4,6 +4,7 @@ import "./style.scss";
 import Divider from "../../../components/divider/index.jsx";
 import MyEditor from "../../../components/AdminEditor/MyEditor.jsx";
 import {useLocation, useParams} from "react-router-dom";
+import TinyEditor from "../../../components/AdminEditor/TinyEditor.jsx";
 
 const ChangePost = () => {
 
@@ -233,10 +234,10 @@ const ChangePost = () => {
                             ],
                         }}
                     />*/}
-                    <MyEditor
+                    <TinyEditor
                         data={data.title}
                         onChange={(newValue) => setData(prev => ({...prev, title: newValue}))}
-                    ></MyEditor>
+                    ></TinyEditor>
                 </div>
                 <div className="imgWrapper">
                     <div {...dropzone1_1.getRootProps()} className="dropzone">
@@ -301,10 +302,10 @@ const ChangePost = () => {
                             },
                         }}
                     />*/}
-                    <MyEditor
+                    <TinyEditor
                         data={data.description}
                         onChange={(newValue) => setData(prev => ({...prev, description: newValue}))}
-                    ></MyEditor>
+                    ></TinyEditor>
                 </div>
 
 

@@ -18,8 +18,8 @@
     }
 
     p {
-      margin-top: 22px;
-      margin-bottom: 22px;
+      margin-top: 10px;
+      margin-bottom: 5px;
     }
   }
 
@@ -33,6 +33,8 @@
     .previewArticleSmall {
       width: calc(33.333% - 24.66px); // чтобы учесть промежутки между карточками
       box-sizing: border-box;
+      margin-bottom: 15px;
+
       @media (max-width: 767px) {
         width: calc(50% - 14.66px);
       }
@@ -40,7 +42,7 @@
       img {
         width: 100%;
         height: auto;
-        margin-bottom: 20px;
+        margin-bottom: 7px;
         border-radius: 10px;
         object-fit: cover;
         @media (min-width: 320px) and (max-width: 1900px) {
@@ -49,7 +51,7 @@
       }
 
       p {
-        margin-bottom: 16px;
+        margin-bottom: 8px;
       }
 
       h2 {
