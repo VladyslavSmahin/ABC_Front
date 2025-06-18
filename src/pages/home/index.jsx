@@ -105,7 +105,7 @@ const Home = ({className = '', truncateHtml}) => {
         fetchArticles();
     }, []);
 
-    if (loading) return <p>Loading...if you wait more than 2 seconds : you are in free mode, the server is sleeping. it takes 30 seconds to wake up. After 15 minutes of inactivity it becomes inactive</p>;
+    if (loading) return <p className='container'>Loading...</p>;
     if (error) return <p style={{ color: 'red' }}>Ошибка: {error}</p>;
 
 
