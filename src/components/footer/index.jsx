@@ -17,7 +17,7 @@ const Footer = () => {
                         of use</Link></li>
                 </ul>
                 <div className='footerRight'>
-                    <a className='number' href=''>©  2025.ABSPS. All rights reserved.</a>
+                    <a className='number' href=''>©  2025.ABCPS. All rights reserved.</a>
                     <Logo className='footerLogo'/>
                 </div>
             </div>

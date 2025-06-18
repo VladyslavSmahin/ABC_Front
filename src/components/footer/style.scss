@@ -90,6 +90,7 @@
       align-items: center;
 
       @media (min-width: 320px) and (max-width: 900px) {
+        max-width: 50%;
        flex-direction: column;
         top: 0px;
         left: -60px;
@@ -99,6 +100,7 @@
 
 
       .footerLogo{
+        pointer-events: none;
         display: flex;
         align-items: center;
         position: relative;
@@ -106,7 +108,7 @@
         left: -130px;
         @media (min-width: 320px) and (max-width: 900px) {
           top: 10px;
-          left: -60px;
+          left: -50px;
         }
 
 
@@ -149,6 +151,7 @@
       }
 
       .number{
+        pointer-events: none;
         font-weight: 700;
         font-size: 9px;
       }
