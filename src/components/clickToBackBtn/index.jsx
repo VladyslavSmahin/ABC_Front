@@ -1,7 +1,7 @@
 import './style.scss';
 import {useEffect, useState} from "react";
 
-const ClickToBackBtn = ({className}) => {
+const ClickToBackBtn = ({className, onClick}) => {
 
     const [isFixed, setIsFixed] = useState(false);
 
@@ -16,7 +16,7 @@ const ClickToBackBtn = ({className}) => {
 
 
     return (
-        <div className={`clickToBackBtn ${isFixed ? 'fixed' : 'static'} ${className}`}>
+        <div className={`clickToBackBtn ${isFixed ? 'fixed' : 'static'} ${className}`} onClick={onClick}>
             <img src='/images/arrow.svg' alt='arrow' />
             <p>back</p>
         </div>

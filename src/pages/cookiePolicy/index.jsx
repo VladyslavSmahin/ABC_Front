@@ -1,10 +1,12 @@
 import './style.scss'
 import ArticleHeader from "../../components/article/articleHeader/index.jsx";
+import ClickToBackBtn from "../../components/clickToBackBtn/index.jsx";
 
 const CookiePolicy = ({className = ''}) => {
     return (
         <div className={`cookie container ${className}`}>
             <ArticleHeader category='COOKIE POLICY FOR ABCPS.EU'></ArticleHeader>
+            <ClickToBackBtn onClick={() => window.history.back()}/>
             <strong>1. WHAT ARE COOKIES?</strong>
             <p>
                 Cookies are small text files stored on your device when you visit a website. They help enhance your

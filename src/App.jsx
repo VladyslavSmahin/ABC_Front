@@ -15,6 +15,7 @@ import Article from "./components/article/index.jsx";
 import MainAdminPage from "./pages/admin/mainAdminPage/index.jsx";
 import ChangePost from "./pages/admin/changePost/index.jsx";
 import GetAllArticlesPage from "./pages/admin/getAllArticles/index.jsx";
+import ScrollToTop from "./utils/ScrollToTop.jsx";
 
 function App() {
 
@@ -62,6 +63,7 @@ function App() {
 
     return (
         <BrowserRouter>
+            <ScrollToTop />
             <Routes>
                 <Route path="/" element={<MainLayout><Home truncateHtml={truncateHtml} /></MainLayout>} />
                 <Route path="/Analytics" element={<MainLayout><Analytics truncateHtml={truncateHtml} /></MainLayout>}>
