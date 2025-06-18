@@ -47,7 +47,6 @@ const Home = ({className = '', truncateHtml}) => {
 
                 const sortedData = nonDeletedArticles.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-                console.log(sortedData);
 
                 const pickLatest = (articles, key) => {
                     return articles
@@ -84,10 +83,6 @@ const Home = ({className = '', truncateHtml}) => {
                 ].filter(id => id);
 
                 const availableArticles = sortedData.filter(article => !usedIds.includes(article._id));
-
-                // Перемешиваем оставшиеся статьи случайным образом
-                const shuffledArticles = availableArticles.sort(() => Math.random() - 0.5);
-
 
                 const topRandomArticles = availableArticles
                     .sort((a, b) => new Date(b.dateRaw) - new Date(a.dateRaw))

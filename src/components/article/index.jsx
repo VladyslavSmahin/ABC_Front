@@ -39,8 +39,19 @@ const Article = () => {
                 if (!response.ok) throw new Error("Error while retrieving all articles");
                 const data = await response.json();
 
+                const currentDate = new Date();
+                currentDate.setHours(0, 0, 0, 0); // обнуление времени
+
+                const activeArticles = data.filter(post => {
+                    const publishDate = new Date(post.dateRaw);
+                    publishDate.setHours(0, 0, 0, 0);
+                    return publishDate <= currentDate;
+                });
+
+                const articles = activeArticles.filter(post => !post.isDeleted);
+
                 // исключаем текущую статью из списка
-                const filtered = data.filter(item => item._id !== postId);
+                const filtered = articles.filter(item => item._id !== postId);
 
                 // перемешиваем и берём 2 случайные
                 const shuffled = filtered.sort(() => 0.5 - Math.random());
@@ -57,9 +68,10 @@ const Article = () => {
         fetchAllArticles();
 
     }, [postId]);
-    useEffect(() => {
+
+    /*useEffect(() => {
         console.log("Read more articles updated:", readMoreArticles);
-    }, [readMoreArticles]);
+    }, [readMoreArticles]);*/
 
 
     if (loading) return <p className='loading'>Loading article...</p>;
