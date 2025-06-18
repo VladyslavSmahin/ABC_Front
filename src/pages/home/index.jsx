@@ -2,6 +2,8 @@ import './style.scss'
 import Divider from "../../components/divider/index.jsx";
 import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
+import SkeletonImage from "../../components/SkeletonImage/SkeletonImage.jsx";
+import LazyImage from "../../components/LazyImage/LazyImage.jsx";
 
 const Home = ({className = '', truncateHtml}) => {
     const [isDesktop, setIsDesktop] = useState(window.innerWidth > 1080);
@@ -121,7 +123,8 @@ const Home = ({className = '', truncateHtml}) => {
                         {mainArticle1 ? (
                             <>
                                 <Link to={`${mainArticle1.category}/post/${mainArticle1._id}`}>
-                                    <img
+                                    <SkeletonImage
+                                        aspectRatio="3 / 2"
                                         src={mainArticle1.imageUrl3_2 || mainArticle1.imageUrl1_1}
                                         alt='main article'
                                         className='logoHomeSection2'
@@ -222,10 +225,11 @@ const Home = ({className = '', truncateHtml}) => {
                     {randomArticles.map((article, index) => (
                         <div key={article._id || index} className='homeSection3CardWrapper'>
                             <Link to={`${article.category}/post/${article._id}`}>
-                                <img
+                                <SkeletonImage
                                     src={article.imageUrl1_1}
                                     alt='article img'
                                     className='homeSection3CardWrapperPhoto'
+                                    aspectRatio="297 / 288"
                                 />
                             </Link>
                             <p className='photoDate'>{article.date} | {article.category}</p>

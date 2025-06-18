@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import './style.scss';
 import {Link} from "react-router-dom";
+import SkeletonImage from "../SkeletonImage/SkeletonImage.jsx";
 
 const PreviewArticle = ({ className, category, truncateHtml }) => {
     const [posts, setPosts] = useState([]);
@@ -92,7 +93,7 @@ const PreviewArticle = ({ className, category, truncateHtml }) => {
         <div className={`previewArticleWrapper container ${className}`}>
             <div className="previewArticleMain">
                 <Link to={`post/${firstPost._id}`}>
-                    <img src={firstPost.imageUrl8_3 ? firstPost.imageUrl8_3 : firstPost.imageUrl3_2} alt='img 8.3' />
+                    <SkeletonImage src={firstPost.imageUrl8_3 ? firstPost.imageUrl8_3 : firstPost.imageUrl3_2} alt='img 8.3' aspectRatio="12 / 5"/>
                     <p className='photoDate'>{firstPost.date}</p>
                     <h2 className='photoDescription'
                         dangerouslySetInnerHTML={{ __html: firstPost.title || 'пусто' }}
@@ -103,7 +104,7 @@ const PreviewArticle = ({ className, category, truncateHtml }) => {
                 {otherPosts.map(post => (
                     <div className="previewArticleSmall" key={post._id}>
                         <Link to={`post/${post._id}`}>
-                            <img src={post.imageUrl1_1} alt='img 1.1' />
+                            <SkeletonImage src={post.imageUrl1_1} alt='img 1.1' aspectRatio="1 / 1"/>
                             <p className='photoDate'>{post.date}</p>
                             <h4
                                 className='photoDescription'

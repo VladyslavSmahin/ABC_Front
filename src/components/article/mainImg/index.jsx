@@ -1,10 +1,10 @@
 import './style.scss'
-import logo from "../logo/index.jsx";
+import SkeletonImage from "../../SkeletonImage/SkeletonImage.jsx";
 
 const MainImg = ({src, alt = '', classname = '', dateText}) => {
     return (
         <div className={`mainImg ${classname}`}>
-            <img src={src} alt={alt} />
+            <SkeletonImage src={src} alt={alt} aspectRatio="12 / 5"/>
             <p className='photoDate'>{dateText}</p>
         </div>
     );
