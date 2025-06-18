@@ -1,11 +1,12 @@
 import './style.scss'
 import ArticleHeader from "../../components/article/articleHeader/index.jsx";
+import ClickToBackBtn from "../../components/clickToBackBtn/index.jsx";
 
 const TermsAndConditions = ({ className = '' }) => {
         return (
             <div className={`termsAndConditions container ${className}`}>
                     <ArticleHeader category='TERMS AND CONDITIONS OF USE FOR ABCPS.EU' />
-
+                <ClickToBackBtn onClick={() => window.history.back()}/>
                     <strong>1. ACCEPTANCE OF TERMS</strong>
                     <p>
                             By accessing or using the website abcps.eu, you agree to be bound by these Terms and Conditions. If you do not agree to these terms, please refrain from using the website.
