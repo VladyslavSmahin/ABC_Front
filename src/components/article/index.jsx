@@ -4,6 +4,7 @@ import MainImg from "./mainImg/index.jsx";
 import Divider from "../divider/index.jsx";
 import ReadMoreCard from "./readMoreCard/index.jsx";
 import './style.scss'
+import ClickToTopBtn from "../clickToTopbtn/index.jsx";
 
 const Article = () => {
     const {postId} = useParams();
@@ -116,8 +117,7 @@ const Article = () => {
                     ))}
                 </div>
             </div>
-
-
+            <ClickToTopBtn/>
         </div>
     );
 };
