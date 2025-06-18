@@ -1,8 +1,10 @@
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { useLocation, Routes } from 'react-router-dom';
+import { useRef } from 'react';
 
- export const AnimatedRoutes = ({ children }) => {
+export const AnimatedRoutes = ({ children }) => {
     const location = useLocation();
+    const nodeRef = useRef(null); // ✅ создаём nodeRef
 
     return (
         <TransitionGroup component={null}>
@@ -10,10 +12,13 @@ import { useLocation, Routes } from 'react-router-dom';
                 key={location.pathname}
                 classNames="fade"
                 timeout={300}
+                nodeRef={nodeRef} // ✅ передаём nodeRef
             >
-                <Routes location={location}>
-                    {children}
-                </Routes>
+                <div ref={nodeRef}>
+                    <Routes location={location}>
+                        {children}
+                    </Routes>
+                </div>
             </CSSTransition>
         </TransitionGroup>
     );

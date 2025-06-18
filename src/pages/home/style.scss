@@ -96,14 +96,14 @@
       .logoHomeSection2 {
         border-radius: 20px;
         margin-bottom: 25px;
-        max-width: 575px;
+        //max-width: 575px;
         grid-column: 1;
 
         @media (min-width: 1080px) and (max-width: 1920px) {
-          max-width: calc(400px + 175 * (100vw - 1080px) / 840);
+          //max-width: calc(400px + 175 * (100vw - 1080px) / 840);
         }
         @media (min-width: 320px) and (max-width: 1080px) {
-          max-width: calc(290px + 700 * (100vw - 320px) / 760);
+          //max-width: calc(290px + 700 * (100vw - 320px) / 760);
           align-self: center;
         }
       }

@@ -34,7 +34,7 @@ const Home = ({className = '', truncateHtml}) => {
             try {
                 const response = await fetch(`${API_URL}/articles`);
                 if (!response.ok) {
-                    throw new Error("Ошибка при получении постов");
+                    throw new Error("error");
                 }
                 const data = await response.json();
 
@@ -102,8 +102,8 @@ const Home = ({className = '', truncateHtml}) => {
         fetchArticles();
     }, []);
 
-    if (loading) return <p className='container'>Loading...</p>;
-    if (error) return <p style={{ color: 'red' }}>Ошибка: {error}</p>;
+    /*if (loading) return <p className='container'>Loading...</p>;*/
+    if (error) return <p style={{ color: 'red' }}>error: {error}</p>;
 
 
     return (
@@ -117,6 +117,8 @@ const Home = ({className = '', truncateHtml}) => {
                         <h4>Political studies</h4>
                     </div>
                 </section>
+                {!loading && (
+                    <>
                 <Divider className="dividerSection1" />
                 <section className={`homeSection2 ${isDesktop ? 'container' : ''}`}>
                     <div className='homeSection2LeftTextWrapper container'>
@@ -124,7 +126,7 @@ const Home = ({className = '', truncateHtml}) => {
                             <>
                                 <Link to={`${mainArticle1.category}/post/${mainArticle1._id}`}>
                                     <SkeletonImage
-                                        aspectRatio="3 / 2"
+                                        aspectRatio="571 / 378"
                                         src={mainArticle1.imageUrl3_2 || mainArticle1.imageUrl1_1}
                                         alt='main article'
                                         className='logoHomeSection2'
@@ -135,12 +137,12 @@ const Home = ({className = '', truncateHtml}) => {
                                     <Link
                                         to={`${mainArticle1.category}/post/${mainArticle1._id}`}
                                         className='photoDescription photoDescriptionMain'
-                                        dangerouslySetInnerHTML={{ __html: mainArticle1.title || 'пусто' }}
+                                        dangerouslySetInnerHTML={{ __html: mainArticle1.title || '' }}
                                     />
                                 </div>
                             </>
                         ) : (
-                            <p>Нет главной статьи</p>
+                            <p></p>
                         )}
 
 
@@ -152,7 +154,7 @@ const Home = ({className = '', truncateHtml}) => {
                                 <p className='photoDate'>{mainArticle2.date} | {mainArticle2.category}</p>
                                 <Link to={`${mainArticle2.category}/post/${mainArticle2._id}`}
                                       className='photoDescription'
-                                      dangerouslySetInnerHTML={{ __html: mainArticle2.title || 'пусто' }}
+                                      dangerouslySetInnerHTML={{ __html: mainArticle2.title || '' }}
                                 >
                                 </Link>
                             </div>
@@ -166,7 +168,7 @@ const Home = ({className = '', truncateHtml}) => {
                             <div className='homeSection2TextWrapper homeSection2TextWrapper3'>
                                 <p className='photoDate'>{mainArticle3.date} | {mainArticle3.category}</p>
                                 <Link to={`${mainArticle3.category}/post/${mainArticle3._id}`} className='photoDescription'
-                                      dangerouslySetInnerHTML={{ __html: mainArticle3.title || 'пусто' }}
+                                      dangerouslySetInnerHTML={{ __html: mainArticle3.title || '' }}
                                 >
                                 </Link>
                             </div>
@@ -180,7 +182,7 @@ const Home = ({className = '', truncateHtml}) => {
                             <div className='homeSection2TextWrapper homeSection2TextWrapper4'>
                                 <p className='photoDate'>{mainArticle4.date} | {mainArticle4.category}</p>
                                 <Link to={`${mainArticle4.category}/post/${mainArticle4._id}`} className='photoDescription'
-                                      dangerouslySetInnerHTML={{ __html: mainArticle4.title || 'пусто' }}
+                                      dangerouslySetInnerHTML={{ __html: mainArticle4.title || '' }}
                                 >
                                 </Link>
                             </div>
@@ -194,7 +196,7 @@ const Home = ({className = '', truncateHtml}) => {
                             <div className='homeSection2TextWrapper homeSection2TextWrapper5'>
                                 <p className='photoDate'>{mainArticle5.date} | {mainArticle5.category}</p>
                                 <Link to={`${mainArticle5.category}/post/${mainArticle5._id}`} className='photoDescription'
-                                      dangerouslySetInnerHTML={{ __html: mainArticle5.title || 'пусто' }}
+                                      dangerouslySetInnerHTML={{ __html: mainArticle5.title || '' }}
                                 >
                                 </Link>
                             </div>
@@ -208,14 +210,14 @@ const Home = ({className = '', truncateHtml}) => {
                             <div className='homeSection2TextWrapper homeSection2TextWrapper6'>
                                 <p className='photoDate'>{mainArticle6.date} | {mainArticle6.category}</p>
                                 <Link to={`${mainArticle6.category}/post/${mainArticle6._id}`} className='photoDescription'
-                                      dangerouslySetInnerHTML={{ __html: mainArticle6.title || 'пусто' }}
+                                      dangerouslySetInnerHTML={{ __html: mainArticle6.title || '' }}
                                 >
                                 </Link>
                             </div>
                         ) : (
                             <div className='homeSection2TextWrapper homeSection2TextWrapper6'>
                                 <p className='photoDate'>APR 12 , 2025 | Forecasts</p>
-                                <Link to='/post' className='photoDescription'>Статья 6</Link>
+                                <Link to='/post' className='photoDescription'></Link>
                             </div>
                         )}
                     </div>
@@ -241,7 +243,8 @@ const Home = ({className = '', truncateHtml}) => {
                         </div>
                     ))}
                 </section>
-
+                    </>
+                )}
                 <Divider />
                 <section className='homeSection4 container'>
                     <p className='homeSection4Text'><span>ABC Political Studies</span> is an emerging think tank rooted
