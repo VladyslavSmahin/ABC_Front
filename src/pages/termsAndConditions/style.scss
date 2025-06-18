@@ -1,0 +1,22 @@
+.termsAndConditions {
+  .category {
+    p {
+      font-size: 40px;
+      @media (min-width: 320px) and (max-width: 1420px) {
+        font-size: calc(20px + 20 * (100vw - 320px) / 1100);
+      }
+    }
+
+  }
+  strong{
+    font-size: 25px;
+  }
+  p{
+    font-family: "Roboto Light", sans-serif;
+    font-size: 22px;
+    margin: 5px 0 20px;
+  }
+  a{
+    color: black;
+  }
+}

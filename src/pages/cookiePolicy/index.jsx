@@ -47,8 +47,9 @@ const CookiePolicy = ({className = ''}) => {
             <p>
                 If you have any questions about our use of cookies or this policy, please contact us at:
                 <br/>
-                📧 <a href="mailto:info.abcps@gmail.com">info.abcps@gmail.com</a>
+
             </p>
+            <p>📧 <a href="mailto:info.abcps@gmail.com">info.abcps@gmail.com</a></p>
         </div>
     );
 };
