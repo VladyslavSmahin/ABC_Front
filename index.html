@@ -1,16 +1,56 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/images/fav-icon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/images/fav-icon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>ABC</title>
-  </head>
-  <body>
+  <title>ABCPS.EU – Professional Services in the EU</title>
 
-    <div id="root"></div>
-    <script src="https://smtpjs.com/v3/smtp.js"></script>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+  <!-- SEO -->
+  <meta name="description" content="ABCPS.EU – Professional Services in the EU">
+  <meta name="keywords" content="ABCPS">
+  <meta name="author" content="ABCPS.EU">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="en">
+  <meta name="geo.region" content="AT" />
+  <meta name="geo.placename" content="Austria" />
+  <meta name="geo.position" content="47.5162;14.5501" />
+  <meta name="ICBM" content="47.5162, 14.5501" />
+
+  <!-- Open Graph for social media -->
+  <meta property="og:title" content="ABCPS.EU – Professional Services in the EU">
+  <meta property="og:description" content="Trusted insights and solutions based in Austria. GDPR-compliant and tailored for EU users.">
+  <meta property="og:image" content="/images/fav-icon.svg">
+  <meta property="og:url" content="https://abcps.eu">
+  <meta property="og:type" content="website">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ABCPS.EU – Professional Services in the EU">
+  <meta name="twitter:description" content="ABCPS">
+  <meta name="twitter:image" content="/images/fav-icon.svg">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://abcps.eu">
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-T23X893TNG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-T23X893TNG');
+  </script>
+</head>
+<body>
+
+<div id="root"></div>
+
+<!-- External SMTP script (email sending if needed) -->
+<script src="https://smtpjs.com/v3/smtp.js"></script>
+
+<!-- Your main React/Vite script -->
+<script type="module" src="/src/main.jsx"></script>
+</body>
 </html>
