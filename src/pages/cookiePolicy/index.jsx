@@ -5,7 +5,7 @@ import ClickToBackBtn from "../../components/clickToBackBtn/index.jsx";
 const CookiePolicy = ({className = ''}) => {
     return (
         <div className={`cookie container ${className}`}>
-            <ArticleHeader category='COOKIE POLICY FOR ABCPS.EU'></ArticleHeader>
+            <ArticleHeader category='COOKIE POLICY'></ArticleHeader>
             <ClickToBackBtn onClick={() => window.history.back()}/>
             <strong>1. WHAT ARE COOKIES?</strong>
             <p>

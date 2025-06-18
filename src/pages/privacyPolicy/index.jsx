@@ -5,7 +5,7 @@ import ClickToBackBtn from "../../components/clickToBackBtn/index.jsx";
 const PrivacyPolicy = ({ className = '' }) => {
         return (
             <div className={`privacyPolicy container ${className}`}>
-                    <ArticleHeader category='PRIVACY POLICY FOR ABCPS.EU' />
+                    <ArticleHeader category='PRIVACY POLICY' />
                 <ClickToBackBtn onClick={() => window.history.back()}/>
                     <p>
                             The administration of the website abcps.eu is committed to protecting your privacy online. We pay great attention to safeguarding the personal data you provide to us. "Personal data" refers to any information relating to an identified or identifiable natural person. This Privacy Policy complies with the General Data Protection Regulation (GDPR) and explains how we collect, use, and store personal data.

@@ -13,8 +13,7 @@ const Footer = () => {
                 <ul>
                     <li><Link to='/privacyPolicy' className='linkTo linkprivacyPolicy'>Privacy Policy</Link></li>
                     <li><Link to='/cookiePolicy' className='linkTo linkToCookiePolicy'>Cookie Policy</Link></li>
-                    <li><Link to='/termsAndConditions' className='linkTo linkToTermsAndConditions'>Terms and Conditions
-                        of use</Link></li>
+                    <li><Link to='/termsAndConditions' className='linkTo linkToTermsAndConditions'>Terms and Conditions</Link></li>
                 </ul>
                 <div className='footerRight'>
                     <a className='number' href=''>©  2025.ABCPS. All rights reserved.</a>

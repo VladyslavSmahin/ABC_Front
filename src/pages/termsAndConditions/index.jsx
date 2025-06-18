@@ -5,7 +5,7 @@ import ClickToBackBtn from "../../components/clickToBackBtn/index.jsx";
 const TermsAndConditions = ({ className = '' }) => {
         return (
             <div className={`termsAndConditions container ${className}`}>
-                    <ArticleHeader category='TERMS AND CONDITIONS OF USE FOR ABCPS.EU' />
+                    <ArticleHeader category='TERMS AND CONDITIONS' />
                 <ClickToBackBtn onClick={() => window.history.back()}/>
                     <strong>1. ACCEPTANCE OF TERMS</strong>
                     <p>

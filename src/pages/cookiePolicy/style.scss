@@ -1,15 +1,16 @@
 .cookie{
   .category{
     p{
-      font-size: 50px;
-      @media (min-width: 320px) and (max-width: 1420px) {
-        font-size: calc(20px + 30 * (100vw - 320px) / 1100);
+      font-family: Raleway-700, sans-serif;
+      font-size: 70px;
+      @media (min-width: 320px) and (max-width: 1200px) {
+        font-size: calc(20px + 50 * ( 100vw - 320px) / 880);
       }
     }
 
   }
   strong{
-    font-family: "Raleway-700", sans-serif;
+    font-family: "Roboto Light", sans-serif;
     font-weight: 700;
     font-size: 25px;
   }
