@@ -1,25 +1,16 @@
-import './style.scss'
+import './style.scss';
 import Divider from "../../components/divider/index.jsx";
-import {useEffect, useState} from "react";
-import {Link} from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import SkeletonImage from "../../components/SkeletonImage/SkeletonImage.jsx";
-import LazyImage from "../../components/LazyImage/LazyImage.jsx";
 
-const Home = ({className = '', truncateHtml}) => {
+const Home = ({ className = '', truncateHtml }) => {
     const [isDesktop, setIsDesktop] = useState(window.innerWidth > 1080);
-    const [mainArticle1, setMainArticle1] = useState(null);
-    const [mainArticle2, setMainArticle2] = useState(null);
-    const [mainArticle3, setMainArticle3] = useState(null);
-    const [mainArticle4, setMainArticle4] = useState(null);
-    const [mainArticle5, setMainArticle5] = useState(null);
-    const [mainArticle6, setMainArticle6] = useState(null);
+    const [mainArticles, setMainArticles] = useState({});
     const [randomArticles, setRandomArticles] = useState([]);
     const [loading, setLoading] = useState(false);
-    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-
-
-
     const [error, setError] = useState(null);
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
     useEffect(() => {
         const handleResize = () => setIsDesktop(window.innerWidth > 1080);
@@ -27,71 +18,30 @@ const Home = ({className = '', truncateHtml}) => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-
     useEffect(() => {
         const fetchArticles = async () => {
             setLoading(true);
             try {
                 const response = await fetch(`${API_URL}/articles`);
-                if (!response.ok) {
-                    throw new Error("error");
-                }
+                if (!response.ok) throw new Error("Failed to fetch articles");
                 const data = await response.json();
 
-                const activeArticles = data.filter((post) => {
-                    const currentDate = new Date();
-                    currentDate.setHours(0, 0, 0, 0); // Сбрасываем время для сравнения только дат
-                    const publishDate = new Date(post.dateRaw);
-                    publishDate.setHours(0, 0, 0, 0); // Сбрасываем время для dateRaw
-                    return publishDate <= currentDate;
-                });
-                const nonDeletedArticles = activeArticles.filter((post) => !post.isDeleted);
+                const currentDate = new Date();
+                currentDate.setHours(0, 0, 0, 0);
+                const filtered = data
+                    .filter(a => !a.isDeleted && new Date(a.dateRaw).setHours(0, 0, 0, 0) <= currentDate)
+                    .sort((a, b) => new Date(b.date) - new Date(a.date));
 
-                const sortedData = nonDeletedArticles.sort((a, b) => new Date(b.date) - new Date(a.date));
+                const picked = {};
+                for (let i = 1; i <= 6; i++) {
+                    const key = `homeArticle_${i}`;
+                    picked[key] = filtered.find(a => a.isMainArticle === key) || null;
+                }
+                setMainArticles(picked);
 
-
-                const pickLatest = (articles, key) => {
-                    return articles
-                        .filter(post => post.isMainArticle === key)
-                        .sort((a, b) => new Date(b.dateRaw) - new Date(a.dateRaw))[0] || null;
-                };
-
-                const main1 = pickLatest(sortedData, "homeArticle_1");
-                setMainArticle1(main1);
-
-                const main2 = pickLatest(sortedData, "homeArticle_2");
-                setMainArticle2(main2);
-
-                const main3 = pickLatest(sortedData, "homeArticle_3");
-                setMainArticle3(main3);
-
-                const main4 = pickLatest(sortedData, "homeArticle_4");
-                setMainArticle4(main4);
-
-                const main5 = pickLatest(sortedData, "homeArticle_5");
-                setMainArticle5(main5);
-
-                const main6 = pickLatest(sortedData, "homeArticle_6");
-                setMainArticle6(main6);
-
-                // Фильтруем статьи, исключая те, что уже используются в homeSection2
-                const usedIds = [
-                    mainArticle1?._id,
-                    mainArticle2?._id,
-                    mainArticle3?._id,
-                    mainArticle4?._id,
-                    mainArticle5?._id,
-                    mainArticle6?._id,
-                ].filter(id => id);
-
-                const availableArticles = sortedData.filter(article => !usedIds.includes(article._id));
-
-                const topRandomArticles = availableArticles
-                    .sort((a, b) => new Date(b.dateRaw) - new Date(a.dateRaw))
-                    .slice(0, 6);
-
-                setRandomArticles(topRandomArticles);
-
+                const usedIds = Object.values(picked).map(a => a?._id).filter(Boolean);
+                const available = filtered.filter(a => !usedIds.includes(a._id));
+                setRandomArticles(available.slice(0, 6));
             } catch (err) {
                 setError(err.message);
             } finally {
@@ -102,158 +52,109 @@ const Home = ({className = '', truncateHtml}) => {
         fetchArticles();
     }, []);
 
-    /*if (loading) return <p className='container'>Loading...</p>;*/
-    if (error) return <p style={{ color: 'red' }}>error: {error}</p>;
+    const renderMainArticle = (key, index, placeholderText) => {
+        const article = mainArticles[`homeArticle_${index + 1}`];
+        if (!article) {
+            return (
+                <div className={`homeSection2TextWrapper homeSection2TextWrapper${index + 2}`}>
+                    <p className='photoDate'>APR 12, 2025 | Forecasts</p>
+                    <Link to='/post' className='photoDescription'>{placeholderText}</Link>
+                </div>
+            );
+        }
 
+        return (
+            <div className={`homeSection2TextWrapper homeSection2TextWrapper${index + 2}`}>
+                <p className='photoDate'>{article.date} | {article.category}</p>
+                <Link
+                    to={`${article.category}/post/${article._id}`}
+                    className='photoDescription'
+                    dangerouslySetInnerHTML={{ __html: article.title || '' }}
+                />
+            </div>
+        );
+    };
+
+    if (error) return <p style={{ color: 'red' }}>Error: {error}</p>;
 
     return (
-
         <div className={`homeWrapper ${className}`}>
-            <div className='home '>
+            <div className='home'>
                 <section className='homeSection1 container'>
-                    <img src='/images/ABC_logo2.png' alt='logo' className='logoHome'/>
+                    <img src='/images/ABC_logo2.png' alt='logo' className='logoHome' />
                     <div className='homeSection1Text'>
                         <h3>Alps - Balkans - Carpathians</h3>
                         <h4>Political studies</h4>
                     </div>
                 </section>
+
                 {!loading && (
                     <>
-                <Divider className="dividerSection1" />
-                <section className={`homeSection2 ${isDesktop ? 'container' : ''}`}>
-                    <div className='homeSection2LeftTextWrapper container'>
-                        {mainArticle1 ? (
-                            <>
-                                <Link to={`${mainArticle1.category}/post/${mainArticle1._id}`}>
-                                    <SkeletonImage
-                                        aspectRatio="571 / 378"
-                                        src={mainArticle1.imageUrl3_2 || mainArticle1.imageUrl1_1}
-                                        alt='main article'
-                                        className='logoHomeSection2'
-                                    />
-                                </Link>
-                                <div className='homeSection2TextWrapper homeSection2TextWrapper1'>
-                                    <p className='photoDate'>{mainArticle1.date} | {mainArticle1.category}</p>
+                        <Divider className="dividerSection1" />
+                        <section className={`homeSection2 ${isDesktop ? 'container' : ''}`}>
+                            <div className='homeSection2LeftTextWrapper container'>
+                                {mainArticles.homeArticle_1 ? (
+                                    <>
+                                        <Link to={`${mainArticles.homeArticle_1.category}/post/${mainArticles.homeArticle_1._id}`}>
+                                            <SkeletonImage
+                                                aspectRatio="571 / 378"
+                                                src={mainArticles.homeArticle_1.imageUrl3_2 || mainArticles.homeArticle_1.imageUrl1_1}
+                                                alt='main article'
+                                                className='logoHomeSection2'
+                                            />
+                                        </Link>
+                                        <div className='homeSection2TextWrapper homeSection2TextWrapper1'>
+                                            <p className='photoDate'>{mainArticles.homeArticle_1.date} | {mainArticles.homeArticle_1.category}</p>
+                                            <Link
+                                                to={`${mainArticles.homeArticle_1.category}/post/${mainArticles.homeArticle_1._id}`}
+                                                className='photoDescription photoDescriptionMain'
+                                                dangerouslySetInnerHTML={{ __html: mainArticles.homeArticle_1.title || '' }}
+                                            />
+                                        </div>
+                                    </>
+                                ) : <p></p>}
+                            </div>
+
+                            <Divider className="dividerSection2RightTextWrapper" />
+
+                            <div className='homeSection2RightTextWrapper container'>
+                                {[...Array(5)].map((_, i) =>
+                                    renderMainArticle(`homeArticle_${i + 2}`, i, `Статья ${i + 2}`)
+                                )}
+                            </div>
+                        </section>
+
+                        <Divider />
+                        <section className='homeSection3 container'>
+                            {randomArticles.map((article, index) => (
+                                <div key={article._id || index} className='homeSection3CardWrapper'>
+                                    <Link to={`${article.category}/post/${article._id}`}>
+                                        <SkeletonImage
+                                            src={article.imageUrl1_1}
+                                            alt='article img'
+                                            className='homeSection3CardWrapperPhoto'
+                                            aspectRatio="297 / 288"
+                                        />
+                                    </Link>
+                                    <p className='photoDate'>{article.date} | {article.category}</p>
                                     <Link
-                                        to={`${mainArticle1.category}/post/${mainArticle1._id}`}
-                                        className='photoDescription photoDescriptionMain'
-                                        dangerouslySetInnerHTML={{ __html: mainArticle1.title || '' }}
+                                        to={`${article.category}/post/${article._id}`}
+                                        className='photoDescription'
+                                        dangerouslySetInnerHTML={{
+                                            __html: truncateHtml(article.title || 'пусто', 100)
+                                        }}
                                     />
                                 </div>
-                            </>
-                        ) : (
-                            <p></p>
-                        )}
-
-
-                    </div>
-                    <Divider className="dividerSection2RightTextWrapper" />
-                    <div className='homeSection2RightTextWrapper container'>
-                        {mainArticle2 ? (
-                            <div className='homeSection2TextWrapper homeSection2TextWrapper2'>
-                                <p className='photoDate'>{mainArticle2.date} | {mainArticle2.category}</p>
-                                <Link to={`${mainArticle2.category}/post/${mainArticle2._id}`}
-                                      className='photoDescription'
-                                      dangerouslySetInnerHTML={{ __html: mainArticle2.title || '' }}
-                                >
-                                </Link>
-                            </div>
-                        ) : (
-                            <div className='homeSection2TextWrapper homeSection2TextWrapper2'>
-                                <p className='photoDate'>APR 12 , 2025 | Forecasts</p>
-                                <Link to='/post' className='photoDescription'>Статья 2</Link>
-                            </div>
-                        )}
-                        {mainArticle3 ? (
-                            <div className='homeSection2TextWrapper homeSection2TextWrapper3'>
-                                <p className='photoDate'>{mainArticle3.date} | {mainArticle3.category}</p>
-                                <Link to={`${mainArticle3.category}/post/${mainArticle3._id}`} className='photoDescription'
-                                      dangerouslySetInnerHTML={{ __html: mainArticle3.title || '' }}
-                                >
-                                </Link>
-                            </div>
-                        ) : (
-                            <div className='homeSection2TextWrapper homeSection2TextWrapper3'>
-                                <p className='photoDate'>APR 12 , 2025 | Forecasts</p>
-                                <Link to='/post' className='photoDescription'>Статья 3</Link>
-                            </div>
-                        )}
-                        {mainArticle4 ? (
-                            <div className='homeSection2TextWrapper homeSection2TextWrapper4'>
-                                <p className='photoDate'>{mainArticle4.date} | {mainArticle4.category}</p>
-                                <Link to={`${mainArticle4.category}/post/${mainArticle4._id}`} className='photoDescription'
-                                      dangerouslySetInnerHTML={{ __html: mainArticle4.title || '' }}
-                                >
-                                </Link>
-                            </div>
-                        ) : (
-                            <div className='homeSection2TextWrapper homeSection2TextWrapper4'>
-                                <p className='photoDate'>APR 12 , 2025 | Forecasts</p>
-                                <Link to='/post' className='photoDescription'>Статья 4</Link>
-                            </div>
-                        )}
-                        {mainArticle5 ? (
-                            <div className='homeSection2TextWrapper homeSection2TextWrapper5'>
-                                <p className='photoDate'>{mainArticle5.date} | {mainArticle5.category}</p>
-                                <Link to={`${mainArticle5.category}/post/${mainArticle5._id}`} className='photoDescription'
-                                      dangerouslySetInnerHTML={{ __html: mainArticle5.title || '' }}
-                                >
-                                </Link>
-                            </div>
-                        ) : (
-                            <div className='homeSection2TextWrapper homeSection2TextWrapper5'>
-                                <p className='photoDate'>APR 12 , 2025 | Forecasts</p>
-                                <Link to='/post' className='photoDescription'>Статья 5</Link>
-                            </div>
-                        )}
-                        {mainArticle6 ? (
-                            <div className='homeSection2TextWrapper homeSection2TextWrapper6'>
-                                <p className='photoDate'>{mainArticle6.date} | {mainArticle6.category}</p>
-                                <Link to={`${mainArticle6.category}/post/${mainArticle6._id}`} className='photoDescription'
-                                      dangerouslySetInnerHTML={{ __html: mainArticle6.title || '' }}
-                                >
-                                </Link>
-                            </div>
-                        ) : (
-                            <div className='homeSection2TextWrapper homeSection2TextWrapper6'>
-                                <p className='photoDate'>APR 12 , 2025 | Forecasts</p>
-                                <Link to='/post' className='photoDescription'></Link>
-                            </div>
-                        )}
-                    </div>
-                </section>
-                <Divider />
-                <section className='homeSection3 container'>
-                    {randomArticles.map((article, index) => (
-                        <div key={article._id || index} className='homeSection3CardWrapper'>
-                            <Link to={`${article.category}/post/${article._id}`}>
-                                <SkeletonImage
-                                    src={article.imageUrl1_1}
-                                    alt='article img'
-                                    className='homeSection3CardWrapperPhoto'
-                                    aspectRatio="297 / 288"
-                                />
-                            </Link>
-                            <p className='photoDate'>{article.date} | {article.category}</p>
-                            <Link
-                                to={`${article.category}/post/${article._id}`}
-                                className='photoDescription'
-                                dangerouslySetInnerHTML={{ __html: truncateHtml(article.title || 'пусто', 100) }}
-                            />
-                        </div>
-                    ))}
-                </section>
+                            ))}
+                        </section>
                     </>
                 )}
+
                 <Divider />
                 <section className='homeSection4 container'>
-                    <p className='homeSection4Text'><span>ABC Political Studies</span> is an emerging think tank rooted
-                        in Central Europe, dedicated to exploring and analyzing political, social, and economic
-                        processes across the region.
-                        We focus on the dynamic interplay between the Alpine, Balkan, and Carpathian spaces — a
-                        crossroads of histories, identities and strategic interests. Our mission is to produce
-                        insightful analysis, reliable data, and forward-looking forecasts that help decision-makers,
-                        researchers, and engaged citizens better understand the region's evolving landscape.</p>
+                    <p className='homeSection4Text'>
+                        <span>ABC Political Studies</span> is an emerging think tank rooted in Central Europe, dedicated to exploring and analyzing political, social, and economic processes across the region. We focus on the dynamic interplay between the Alpine, Balkan, and Carpathian spaces — a crossroads of histories, identities and strategic interests. Our mission is to produce insightful analysis, reliable data, and forward-looking forecasts that help decision-makers, researchers, and engaged citizens better understand the region's evolving landscape.
+                    </p>
                 </section>
             </div>
         </div>

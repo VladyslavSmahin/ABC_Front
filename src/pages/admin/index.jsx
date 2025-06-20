@@ -1,32 +1,38 @@
-/*
-import './style.scss'
-import MainAdminPage from "./mainAdminPage/index.jsx";
-import { useState } from "react";
-import GetAllPosts from "./getAllArticles/index.jsx";
-import Dropdown from "../../components/dropdown/index.jsx";
-import ChangePost from "./changePost/index.jsx";
+import {useState} from "react";
+import {useNavigate} from "react-router-dom";
 
-function AdminPage() {
-    const [page, setPage] = useState("mainPage");
+const LoginPage = () => {
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
-    const handlePageChange = (e) => {
-        setPage(e.target.value);
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
+    const handleLogin = async () => {
+        const res = await fetch(`${API_URL}/auth/login`, {
+            method: "POST",
+            credentials: "include", // важно!
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({username, password}),
+        });
+
+        if (res.ok) {
+            navigate("/admin");
+        } else {
+            alert("Неверный логин или пароль");
+        }
     };
 
     return (
-        <div className="admin-page">
-
-            <Dropdown
-                className={``}
-                value={page}
-                onChange={handlePageChange}
-                options={[{value: 'mainPage', label: 'Main Page'}, {value: 'allPosts', label: 'All Posts'}]}
-            />
-            {page === "mainPage" && <MainAdminPage />}
-            {page === "allPosts" && <GetAllPosts setPage={setPage}/>}
-
+        <div className="login">
+            <h2>Login</h2>
+            <input value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Username" />
+            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
+            <button onClick={handleLogin}>Login</button>
         </div>
     );
-}
+};
 
-export default AdminPage;*/
+export default LoginPage;
