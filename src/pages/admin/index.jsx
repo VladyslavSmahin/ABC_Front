@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react'
 import axios from 'axios'
+import "./style.scss";
 
 export default function AdminLogin() {
     const [email, setEmail] = useState('')
@@ -19,16 +20,16 @@ export default function AdminLogin() {
             window.location.href = '/admin'  // перенаправление в админку
             // eslint-disable-next-line no-unused-vars
         } catch (e) {
-            setError('Неверный логин или пароль')
+            setError('wrong password')
         }
     }
 
     return (
-        <div>
-            <h2>Вход в админку</h2>
+        <div className="loginPage">
+            <h2>Log in</h2>
             <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" />
-            <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Пароль" />
-            <button onClick={handleLogin}>Войти</button>
+            <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" />
+            <button onClick={handleLogin}>Log in</button>
             {error && <p>{error}</p>}
         </div>
     )
