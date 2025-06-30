@@ -12,19 +12,16 @@ export default function TinyEditor({ data, onChange }) {
             init={{
                 height: 600,
                 menubar: 'file edit view insert format tools table help',
-                plugins: [
-                    'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
-                    'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
-                    'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
-                ],
-                toolbar:
-                    'undo redo | blocks | bold italic underline strikethrough | ' +
-                    'forecolor backcolor | alignleft aligncenter ' +
-                    'alignright alignjustify | bullist numlist outdent indent | ' +
-                    'removeformat | link image media table | code fullscreen preview',
-                content_style:
-                    'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+                plugins: "advcode advlist advtable anchor autocorrect autolink autosave casechange charmap checklist codesample directionality editimage emoticons export footnotes formatpainter help image insertdatetime link linkchecker lists media mediaembed mergetags nonbreaking pagebreak permanentpen powerpaste searchreplace table tableofcontents tinymcespellchecker typography visualblocks visualchars wordcount",
+                toolbar: "undo redo spellcheckdialog  | blocks fontfamily fontsize | bold italic underline forecolor backcolor | link image | align lineheight checklist bullist numlist | indent outdent | removeformat typography",
+                font_size_formats: '8pt 10pt 12pt 14pt 18pt 24pt 36pt',
+                content_style: `
+                    body { font-family:Helvetica,Arial,sans-serif; font-size:14px }
+                    img { max-width: 100% !important; height: auto !important; display: block; }
+                `
             }}
+
+
             onEditorChange={(newContent) => {
                 onChange(newContent);
             }}

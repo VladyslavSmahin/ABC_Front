@@ -25,6 +25,11 @@
       color: #000;
       padding-left: 22px;
       margin-bottom: 40px;
+
+      img{
+        width: 100%;
+        height: auto;
+      }
       @media (min-width: 320px) and (max-width: 1080px) {
         padding-left: 0px;
       }

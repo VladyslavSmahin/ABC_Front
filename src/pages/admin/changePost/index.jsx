@@ -2,7 +2,6 @@ import {useCallback, useEffect, useState} from "react";
 import {useDropzone} from "react-dropzone";
 import "./style.scss";
 import Divider from "../../../components/divider/index.jsx";
-import MyEditor from "../../../components/AdminEditor/MyEditor.jsx";
 import {useLocation, useParams} from "react-router-dom";
 import TinyEditor from "../../../components/AdminEditor/TinyEditor.jsx";
 
