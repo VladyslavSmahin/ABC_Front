@@ -33,7 +33,7 @@ const MainAdminPage = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        axios.get(`${API_URL}/auth/me`, { withCredentials: true })
+        axios.get(`${API_URL}/auth/me`, {withCredentials: true})
             .then((res) => {
                 console.log('Auth check success', res);
                 setIsAuthenticated(true);
@@ -44,7 +44,6 @@ const MainAdminPage = () => {
             })
             .finally(() => setLoading(false));
     }, []);
-
 
 
     const onDrop1_1 = useCallback((acceptedFiles) => {
@@ -151,17 +150,21 @@ const MainAdminPage = () => {
         navigate("/admin/getAllArticles");
     };
 
+    const handleLogout = () => {
+
+        window.location.reload();
+    };
+
     if (loading) return <p>Загрузка...</p>;
 
     // Если не авторизован, показываем форму логина
-    if (!isAuthenticated) return <AdminLogin />;
+    if (!isAuthenticated) return <AdminLogin/>;
 
 
-
-    return  (
+    return (
         <div className="adminPage">
             <span className="welcome">Welcome to Admin Panel 🙂</span>
-
+            <button className="logout" onClick={handleLogout}>logout</button>
             {showForm ? (
                 <button className='swapAdminPagesBtn' onClick={handleGoToAllArticles}>Go to All Articles</button>
             ) : (

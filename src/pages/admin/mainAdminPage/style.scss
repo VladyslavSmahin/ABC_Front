@@ -31,6 +31,12 @@ $btn-color: rgb(184, 178, 178);
     width: 100%;
     max-width: 600px;
   }
+  .logout{
+    background: $primary-color;
+    color: black;
+    padding: 5px 5px;
+    border-radius: 5px;
+  }
 
   .h2 {
     font-family: 'Raleway-400', sans-serif;
