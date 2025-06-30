@@ -1,38 +1,35 @@
-import {useState} from "react";
-import {useNavigate} from "react-router-dom";
+import {useEffect, useState} from 'react'
+import axios from 'axios'
 
-const LoginPage = () => {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const navigate = useNavigate();
-
+export default function AdminLogin() {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [error, setError] = useState('')
     const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
-    const handleLogin = async () => {
-        const res = await fetch(`${API_URL}/auth/login`, {
-            method: "POST",
-            credentials: "include", // важно!
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({username, password}),
-        });
+    /*useEffect(() => {
+        axios.get(`${API_URL}/auth/me`, { withCredentials: true })
+            .then()
+    }, [])*/
 
-        if (res.ok) {
-            navigate("/admin");
-        } else {
-            alert("Неверный логин или пароль");
+
+    const handleLogin = async () => {
+        try {
+            const res = await axios.post(`${API_URL}/auth/login`, { email, password }, { withCredentials: true })
+            window.location.href = '/admin'  // перенаправление в админку
+            // eslint-disable-next-line no-unused-vars
+        } catch (e) {
+            setError('Неверный логин или пароль')
         }
-    };
+    }
 
     return (
-        <div className="login">
-            <h2>Login</h2>
-            <input value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Username" />
-            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
-            <button onClick={handleLogin}>Login</button>
+        <div>
+            <h2>Вход в админку</h2>
+            <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" />
+            <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Пароль" />
+            <button onClick={handleLogin}>Войти</button>
+            {error && <p>{error}</p>}
         </div>
-    );
-};
-
-export default LoginPage;
+    )
+}

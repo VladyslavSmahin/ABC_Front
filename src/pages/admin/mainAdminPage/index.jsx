@@ -1,10 +1,12 @@
-import {useCallback, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {useDropzone} from "react-dropzone";
 import "./style.scss";
 import Divider from "../../../components/divider/index.jsx";
 import MyEditor from "../../../components/AdminEditor/MyEditor.jsx";
 import {Outlet, useNavigate} from "react-router-dom";
 import TinyEditor from "../../../components/AdminEditor/TinyEditor.jsx";
+import axios from "axios";
+import AdminLogin from "../index.jsx";
 
 const MainAdminPage = () => {
     const [data, setData] = useState({
@@ -23,12 +25,26 @@ const MainAdminPage = () => {
     });
 
     const [showForm, setShowForm] = useState(true);
-
     const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-
     const navigate = useNavigate();
-
     const [uploading, setUploading] = useState(false);
+
+    const [isAuthenticated, setIsAuthenticated] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        axios.get(`${API_URL}/auth/me`, { withCredentials: true })
+            .then((res) => {
+                console.log('Auth check success', res);
+                setIsAuthenticated(true);
+            })
+            .catch((err) => {
+                console.log('Auth check failed', err);
+                setIsAuthenticated(false);
+            })
+            .finally(() => setLoading(false));
+    }, []);
+
 
 
     const onDrop1_1 = useCallback((acceptedFiles) => {
@@ -135,7 +151,14 @@ const MainAdminPage = () => {
         navigate("/admin/getAllArticles");
     };
 
-    return (
+    if (loading) return <p>Загрузка...</p>;
+
+    // Если не авторизован, показываем форму логина
+    if (!isAuthenticated) return <AdminLogin />;
+
+
+
+    return  (
         <div className="adminPage">
             <span className="welcome">Welcome to Admin Panel 🙂</span>
 
