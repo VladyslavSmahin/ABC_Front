@@ -16,7 +16,7 @@ export default function AdminLogin() {
     const handleLogin = async () => {
         try {
             const res = await axios.post(`${API_URL}/auth/login`, { email, password }, { withCredentials: true })
-            //window.location.href = '/admin'  // перенаправление в админку
+            window.location.href = '/admin'  // перенаправление в админку
             // eslint-disable-next-line no-unused-vars
         } catch (e) {
             setError('Неверный логин или пароль')
