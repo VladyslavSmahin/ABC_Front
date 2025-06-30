@@ -164,7 +164,7 @@ const MainAdminPage = () => {
     return (
         <div className="adminPage">
             <span className="welcome">Welcome to Admin Panel 🙂</span>
-            <button className="logout" onClick={handleLogout}>Log out</button>
+            <button className="logout" onClick={handleLogout}>Logout</button>
             {showForm ? (
                 <button className='swapAdminPagesBtn' onClick={handleGoToAllArticles}>Go to All Articles</button>
             ) : (
