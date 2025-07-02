@@ -13,6 +13,7 @@ const Home = ({ className = '', truncateHtml }) => {
     const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
     useEffect(() => {
+
         const handleResize = () => setIsDesktop(window.innerWidth > 1080);
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
@@ -35,8 +36,12 @@ const Home = ({ className = '', truncateHtml }) => {
                 const picked = {};
                 for (let i = 1; i <= 6; i++) {
                     const key = `homeArticle_${i}`;
-                    picked[key] = filtered.find(a => a.isMainArticle === key) || null;
+                    const articles = filtered
+                        .filter(a => a.isMainArticle === key)
+                        .sort((a, b) => new Date(b.date) - new Date(a.date)); // по убыванию
+                    picked[key] = articles[0] || null; // последняя по дате
                 }
+
                 setMainArticles(picked);
 
                 const usedIds = Object.values(picked).map(a => a?._id).filter(Boolean);
@@ -51,12 +56,12 @@ const Home = ({ className = '', truncateHtml }) => {
 
         fetchArticles();
     }, []);
-
+    console.log(mainArticles)
     const renderMainArticle = (key, index, placeholderText) => {
-        const article = mainArticles[`homeArticle_${index + 1}`];
+        const article = mainArticles[key];  // <- вот здесь!
         if (!article) {
             return (
-                <div className={`homeSection2TextWrapper homeSection2TextWrapper${index + 2}`}>
+                <div key={`placeholder_${index}`} className={`homeSection2TextWrapper homeSection2TextWrapper${index + 2}`}>
                     <p className='photoDate'>APR 12, 2025 | Forecasts</p>
                     <Link to='/post' className='photoDescription'>{placeholderText}</Link>
                 </div>
@@ -64,7 +69,7 @@ const Home = ({ className = '', truncateHtml }) => {
         }
 
         return (
-            <div className={`homeSection2TextWrapper homeSection2TextWrapper${index + 2}`}>
+            <div key={article._id || `main_${index}`} className={`homeSection2TextWrapper homeSection2TextWrapper${index + 2}`}>
                 <p className='photoDate'>{article.date} | {article.category}</p>
                 <Link
                     to={`${article.category}/post/${article._id}`}
@@ -74,6 +79,8 @@ const Home = ({ className = '', truncateHtml }) => {
             </div>
         );
     };
+
+
 
     if (error) return <p style={{ color: 'red' }}>Error: {error}</p>;
 
