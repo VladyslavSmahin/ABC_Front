@@ -20,7 +20,7 @@
       font-family: RobotoSerif-Light, sans-serif;
       font-weight: 400;
       font-size: 22px;
-      line-height: 125%;
+      line-height: 150%;
       text-align: justify;
       color: #000;
       padding-left: 22px;
@@ -34,7 +34,37 @@
         padding-left: 0px;
       }
       p{
-        line-height: 125% !important;
+        line-height: 150% !important;
+      }
+      table {
+        margin: 0 auto;
+        display: block;
+        overflow-x: auto;
+        width: 100%;
+        max-width: 100%;
+        scrollbar-color: #491d1d #e0e0e0;
+        scrollbar-width: thin;
+      }
+      table::-webkit-scrollbar {
+        height: 8px;
+      }
+      table::-webkit-scrollbar-track {
+        background: #e0e0e0;
+      }
+      table::-webkit-scrollbar-thumb {
+        background-color: #999;
+        border-radius: 4px;
+      }
+      thead,
+      tbody,
+      tr {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+      }
+       td,
+       th {
+        word-break: break-word;
       }
     }
 
