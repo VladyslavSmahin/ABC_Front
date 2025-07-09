@@ -20,6 +20,15 @@ const Home = ({ className = '', truncateHtml }) => {
     }, []);
 
     useEffect(() => {
+        const shuffleArray = (array) => {
+            const result = array.slice();
+            for (let i = result.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [result[i], result[j]] = [result[j], result[i]];
+            }
+            return result;
+        };
+
         const fetchArticles = async () => {
             setLoading(true);
             try {
@@ -38,15 +47,17 @@ const Home = ({ className = '', truncateHtml }) => {
                     const key = `homeArticle_${i}`;
                     const articles = filtered
                         .filter(a => a.isMainArticle === key)
-                        .sort((a, b) => new Date(b.date) - new Date(a.date)); // по убыванию
-                    picked[key] = articles[0] || null; // последняя по дате
+                        .sort((a, b) => new Date(b.date) - new Date(a.date));
+                    picked[key] = articles[0] || null;
                 }
 
                 setMainArticles(picked);
 
                 const usedIds = Object.values(picked).map(a => a?._id).filter(Boolean);
                 const available = filtered.filter(a => !usedIds.includes(a._id));
-                setRandomArticles(available.slice(0, 6));
+
+                const shuffled = shuffleArray(available);
+                setRandomArticles(shuffled.slice(0, 6));
             } catch (err) {
                 setError(err.message);
             } finally {
@@ -56,6 +67,7 @@ const Home = ({ className = '', truncateHtml }) => {
 
         fetchArticles();
     }, []);
+
     console.log(mainArticles)
     const renderMainArticle = (key, index, placeholderText) => {
         const article = mainArticles[key];  // <- вот здесь!
