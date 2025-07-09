@@ -8,6 +8,9 @@
     width: 100%;
     max-width: 1200px;
     margin-bottom: 50px;
+    @media (min-width: 320px) and (max-width: 1520px) {
+      margin-bottom: calc(20px + 30 * (100vw - 320px) / 1200);
+    }
 
     img {
       width: 100%;
