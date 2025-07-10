@@ -35,6 +35,10 @@
       }
       p{
         line-height: 150% !important;
+        text-align: justify;
+        @media (min-width: 320px) and (max-width: 768px) {
+          text-align: left;
+        }
       }
       table {
         margin: 0 auto;
