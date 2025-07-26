@@ -172,8 +172,7 @@ const Home = ({ className = '', truncateHtml }) => {
                 <Divider />
                 <section className='homeSection4 container'>
                     <p className='homeSection4Text'>
-                        <span>ABC PS (ALPS-BALKANS-CARPATHIANS
-POLITICAL STUDIES) </span>  is an independent civic initiative with no legal entity status and no commercial activity.<br/><br/>
+                        <span>ABC PS (ALPS-BALKANS-CARPATHIANS POLITICAL STUDIES) </span>  is an independent civic initiative with no legal entity status and no commercial activity.<br/><br/>
 
                         The project is created on a voluntary basis by a group of researchers and authors who publish analytical materials to promote a deeper understanding of political and social processes.<br/><br/>
 
