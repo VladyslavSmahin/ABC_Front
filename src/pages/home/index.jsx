@@ -172,7 +172,14 @@ const Home = ({ className = '', truncateHtml }) => {
                 <Divider />
                 <section className='homeSection4 container'>
                     <p className='homeSection4Text'>
-                        <span>ABC Political Studies</span> is an emerging think tank rooted in Central Europe, dedicated to exploring and analyzing political, social, and economic processes across the region. We focus on the dynamic interplay between the Alpine, Balkan, and Carpathian spaces — a crossroads of histories, identities and strategic interests. Our mission is to produce insightful analysis, reliable data, and forward-looking forecasts that help decision-makers, researchers, and engaged citizens better understand the region's evolving landscape.
+                        <span>ABC PS (ALPS-BALKANS-CARPATHIANS
+POLITICAL STUDIES) </span>  is an independent civic initiative with no legal entity status and no commercial activity.<br/><br/>
+
+                        The project is created on a voluntary basis by a group of researchers and authors who publish analytical materials to promote a deeper understanding of political and social processes.<br/><br/>
+
+                        We do not receive funding, accept donations, cooperate with government bodies, or engage in lobbying.<br/><br/>
+
+                        All publications are driven solely by research interest and a sense of public responsibility.
                     </p>
                 </section>
             </div>
