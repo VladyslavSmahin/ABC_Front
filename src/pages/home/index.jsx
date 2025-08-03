@@ -68,7 +68,7 @@ const Home = ({className = '', truncateHtml}) => {
         fetchArticles();
     }, []);
 
-    console.log(mainArticles)
+
     const renderMainArticle = (key, index, placeholderText) => {
         const article = mainArticles[key];  // <- вот здесь!
         if (!article) {
