@@ -12,6 +12,9 @@ export default function TinyEditor({ data, onChange }) {
             init={{
                 height: 600,
                 menubar: 'file edit view insert format tools table help',
+                convert_urls: false,
+                relative_urls: false,
+                remove_script_host: false,
                 plugins: "advlist anchor autolink autosave charmap codesample directionality help image insertdatetime link lists media nonbreaking pagebreak searchreplace table visualblocks visualchars wordcount",
                 toolbar: "undo redo | blocks fontfamily fontsize | bold italic underline forecolor backcolor | link image | align lineheight bullist numlist | indent outdent | removeformat",
                 font_size_formats: '8pt 10pt 12pt 14pt 18pt 24pt 36pt',

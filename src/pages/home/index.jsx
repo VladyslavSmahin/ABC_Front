@@ -1,10 +1,10 @@
 import './style.scss';
 import Divider from "../../components/divider/index.jsx";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import {useEffect, useState} from "react";
+import {Link} from "react-router-dom";
 import SkeletonImage from "../../components/SkeletonImage/SkeletonImage.jsx";
 
-const Home = ({ className = '', truncateHtml }) => {
+const Home = ({className = '', truncateHtml}) => {
     const [isDesktop, setIsDesktop] = useState(window.innerWidth > 1080);
     const [mainArticles, setMainArticles] = useState({});
     const [randomArticles, setRandomArticles] = useState([]);
@@ -73,7 +73,8 @@ const Home = ({ className = '', truncateHtml }) => {
         const article = mainArticles[key];  // <- вот здесь!
         if (!article) {
             return (
-                <div key={`placeholder_${index}`} className={`homeSection2TextWrapper homeSection2TextWrapper${index + 2}`}>
+                <div key={`placeholder_${index}`}
+                     className={`homeSection2TextWrapper homeSection2TextWrapper${index + 2}`}>
                     <p className='photoDate'>APR 12, 2025 | Forecasts</p>
                     <Link to='/post' className='photoDescription'>{placeholderText}</Link>
                 </div>
@@ -81,26 +82,26 @@ const Home = ({ className = '', truncateHtml }) => {
         }
 
         return (
-            <div key={article._id || `main_${index}`} className={`homeSection2TextWrapper homeSection2TextWrapper${index + 2}`}>
+            <div key={article._id || `main_${index}`}
+                 className={`homeSection2TextWrapper homeSection2TextWrapper${index + 2}`}>
                 <p className='photoDate'>{article.date} | {article.category}</p>
                 <Link
                     to={`${article.category}/post/${article._id}`}
                     className='photoDescription'
-                    dangerouslySetInnerHTML={{ __html: article.title || '' }}
+                    dangerouslySetInnerHTML={{__html: article.title || ''}}
                 />
             </div>
         );
     };
 
 
-
-    if (error) return <p style={{ color: 'red' }}>Error: {error}</p>;
+    if (error) return <p style={{color: 'red'}}>Error: {error}</p>;
 
     return (
         <div className={`homeWrapper ${className}`}>
             <div className='home'>
                 <section className='homeSection1 container'>
-                    <img src='/images/ABC_logo2.png' alt='logo' className='logoHome' />
+                    <img src='/images/ABC_logo2.png' alt='logo' className='logoHome'/>
                     <div className='homeSection1Text'>
                         <h3>Alps - Balkans - Carpathians</h3>
                         <h4>Political studies</h4>
@@ -109,12 +110,13 @@ const Home = ({ className = '', truncateHtml }) => {
 
                 {!loading && (
                     <>
-                        <Divider className="dividerSection1" />
+                        <Divider className="dividerSection1"/>
                         <section className={`homeSection2 ${isDesktop ? 'container' : ''}`}>
                             <div className='homeSection2LeftTextWrapper container'>
                                 {mainArticles.homeArticle_1 ? (
                                     <>
-                                        <Link to={`${mainArticles.homeArticle_1.category}/post/${mainArticles.homeArticle_1._id}`}>
+                                        <Link
+                                            to={`${mainArticles.homeArticle_1.category}/post/${mainArticles.homeArticle_1._id}`}>
                                             <SkeletonImage
                                                 aspectRatio="571 / 378"
                                                 src={mainArticles.homeArticle_1.imageUrl3_2 || mainArticles.homeArticle_1.imageUrl1_1}
@@ -127,14 +129,14 @@ const Home = ({ className = '', truncateHtml }) => {
                                             <Link
                                                 to={`${mainArticles.homeArticle_1.category}/post/${mainArticles.homeArticle_1._id}`}
                                                 className='photoDescription photoDescriptionMain'
-                                                dangerouslySetInnerHTML={{ __html: mainArticles.homeArticle_1.title || '' }}
+                                                dangerouslySetInnerHTML={{__html: mainArticles.homeArticle_1.title || ''}}
                                             />
                                         </div>
                                     </>
                                 ) : <p></p>}
                             </div>
 
-                            <Divider className="dividerSection2RightTextWrapper" />
+                            <Divider className="dividerSection2RightTextWrapper"/>
 
                             <div className='homeSection2RightTextWrapper container'>
                                 {[...Array(5)].map((_, i) =>
@@ -143,7 +145,7 @@ const Home = ({ className = '', truncateHtml }) => {
                             </div>
                         </section>
 
-                        <Divider />
+                        <Divider/>
                         <section className='homeSection3 container'>
                             {randomArticles.map((article, index) => (
                                 <div key={article._id || index} className='homeSection3CardWrapper'>
@@ -169,14 +171,19 @@ const Home = ({ className = '', truncateHtml }) => {
                     </>
                 )}
 
-                <Divider />
+                <Divider/>
                 <section className='homeSection4 container'>
                     <p className='homeSection4Text'>
-                        <span>ABC PS (ALPS-BALKANS-CARPATHIANS POLITICAL STUDIES) </span>  is an independent civic initiative with no legal entity status and no commercial activity.<br/><br/>
+                        <span>
+                            ABC PS (ALPS-BALKANS-CARPATHIANS POLITICAL STUDIES) </span> is an independent civic
+                        initiative with no legal entity status and no commercial activity.<br/><br/>
 
-                        The project is created on a voluntary basis by a group of researchers and authors who publish analytical materials to promote a deeper understanding of political and social processes.<br/><br/>
+                        The project is created on a voluntary basis by a group of researchers and authors who publish
+                        analytical materials to promote a deeper understanding of political and social
+                        processes.<br/><br/>
 
-                        We do not receive funding, accept donations, cooperate with government bodies, or engage in lobbying.<br/><br/>
+                        We do not receive funding, accept donations, cooperate with government bodies, or engage in
+                        lobbying.<br/><br/>
 
                         All publications are driven solely by research interest and a sense of public responsibility.
                     </p>

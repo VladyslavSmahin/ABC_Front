@@ -26,6 +26,7 @@ const Article = () => {
                     throw new Error("Error while retrieving posts");
                 }
                 const data = await response.json();
+                console.log("article.description:", article.description);
                 setArticle(data);
             } catch (err) {
                 setError(err.message);
@@ -70,9 +71,9 @@ const Article = () => {
 
     }, [postId]);
 
-    /*useEffect(() => {
-        console.log("Read more articles updated:", readMoreArticles);
-    }, [readMoreArticles]);*/
+    useEffect(() => {
+
+    }, [article]);
 
 
     if (loading) return <p className='loading'>Loading article...</p>;
