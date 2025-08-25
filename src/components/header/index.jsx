@@ -1,5 +1,5 @@
 import './style.scss'
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import Divider from "../divider/index.jsx";
 import {useState} from "react";
 import InputSearch from "./inputSearch/index.jsx";
@@ -8,6 +8,7 @@ import AccountBtn from "./accountBtn/index.jsx";
 const Header = ({className = ''}) => {
     const [isOpen, setIsOpen] = useState(false);
     const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+    const navigate = useNavigate();
 
     const handleClick = () => {
         setIsOpen(!isOpen);
@@ -35,7 +36,7 @@ const Header = ({className = ''}) => {
                                 </picture>
                             </Link>
                         </li>
-                        <li className='title'>
+                        <li className='title' onClick={() => navigate('/')}>
                             <h2>Alps-Balkans-Carpathians</h2>
                             <h3>Political Studies</h3>
                         </li>
