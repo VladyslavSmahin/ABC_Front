@@ -28,7 +28,11 @@
     src: url('./assets/fonts/Roboto/RobotoSerif-Light.ttf') format('truetype');
     font-style: normal;
 }
-
+@font-face {
+    font-family: 'Roboto-Bold';
+    src: url('./assets/fonts/Roboto/Roboto-Bold.ttf') format('truetype');
+    font-style: normal;
+}
 .number {
     font-family: 'OpenSans-300', sans-serif;
     text-decoration: none;
@@ -103,6 +107,7 @@ button:focus-visible {
     transition: opacity 300ms ease-out;
 }
 strong {
+    font-family: Roboto-Bold, sans-serif;
     font-weight: 700;
     font-synthesis: weight;
 }
