@@ -51,13 +51,13 @@ const Article = () => {
 
                 const articles = activeArticles.filter(post => !post.isDeleted);
 
-                // исключаем текущую статью из списка
-                const filtered = articles.filter(item => item._id !== postId);
+                // исключаем текущую статью и статьи из категории "Databases"
+                const filtered = articles.filter(item => item._id !== postId && item.category !== "Databases");
 
                 // перемешиваем и берём 2 случайные
                 const shuffled = filtered.sort(() => 0.5 - Math.random());
 
-
+console.log(shuffled);
                 setReadMoreArticles(shuffled.slice(0, 2));
 
             } catch (err) {
@@ -93,13 +93,13 @@ const Article = () => {
                     className="postContent"
                     dangerouslySetInnerHTML={{ __html: article.description || 'пусто' }}
                 />
-                <div className="shareThis">
+                {/*<div className="shareThis">
                     <p>Share this:</p>
                     <div className="socialsWrapper">
-                        {/* <a href='' title='click here'><img src='' alt='social'/></a>*/}
+                         <a href='' title='click here'><img src='' alt='social'/></a>
                         Socials Links
                     </div>
-                </div>
+                </div>*/}
             </div>
             <Divider/>
             <div className="postReadMoreWrapper container">

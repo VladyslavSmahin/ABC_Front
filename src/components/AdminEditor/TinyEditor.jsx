@@ -20,6 +20,7 @@ export default function TinyEditor({ data, onChange }) {
                 font_size_formats: '8pt 10pt 12pt 14pt 18pt 24pt 36pt',
                 content_style: `
                     body { font-family:Helvetica,Arial,sans-serif; font-size:14px }
+                    b, strong { font-weight:700; }
                     img { max-width: 100% !important; height: auto !important; display: block; }
                 `
             }}

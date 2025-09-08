@@ -24,13 +24,18 @@ function GetAllArticlesPage() {
                 throw new Error("Error fetching posts");
             }
             const data = await response.json();
-            setPosts(data);
+
+            // сортировка: свежие (новые) статьи сначала
+            const sorted = data.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            setPosts(sorted);
         } catch (err) {
             setError(err.message);
         } finally {
             setLoading(false);
         }
     };
+
 
     const filteredPosts = posts.filter((post) => {
         const currentDate = new Date();

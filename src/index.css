@@ -102,4 +102,7 @@ button:focus-visible {
     opacity: 0;
     transition: opacity 300ms ease-out;
 }
-
+strong {
+    font-weight: 700;
+    font-synthesis: weight;
+}
