@@ -30,7 +30,7 @@
 }
 @font-face {
     font-family: 'Roboto-Bold';
-    src: url('./assets/fonts/Roboto/Roboto-Bold.ttf') format('truetype');
+    src: url('./assets/fonts/Roboto/robotoSerif-bold.ttf') format('truetype');
     font-style: normal;
 }
 .number {
