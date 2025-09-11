@@ -201,38 +201,8 @@ const ChangePost = () => {
                         />
                     </div>
                 </div>
-                {/*<textarea
-                    className="title"
-                    placeholder="Заголовок"
-                    value={data.title}
-                    onChange={(e) => handleChange(e, "title")}
-                />*/}
                 <div className="titleEditor">
-                    {/*<CKEditor
-                        editor={ClassicEditor}
-                        data={data.title}
-                        onChange={(event, editor) => {
-                            const titleData = editor.getData();
-                            setData(prev => ({ ...prev, title: titleData }));
-                        }}
-                        config={{
-                            toolbar: [
-                                "heading",
-                                "|",
-                                "bold",
-                                "italic",
-                                "link",
-                                "bulletedList",
-                                "numberedList",
-                                "|",
-                                "outdent",
-                                "indent",
-                                "|",
-                                "undo",
-                                "redo",
-                            ],
-                        }}
-                    />*/}
+
                     <TinyEditor
                         data={data.title}
                         onChange={(newValue) => setData(prev => ({...prev, title: newValue}))}
